@@ -44,7 +44,7 @@ test-results/
 # Els volums de dades no van al repo
 docker/volumes/
 
-# ── Dades locals (no pujar dades reals ni sintètiques pesades) 
+# ── Dades locals (no pujar dades reals ni sintètiques pesades)
 data/synthetic/*.json
 data/synthetic/*.csv
 data/policies/*.pdf
@@ -88,7 +88,7 @@ uvicorn*.log
 
 # ── Claude ───────────────────────────────────────────────────
 # Fitxers de context i knowledge documents de Claude
-CONTEXT_*.md
+# CONTEXT_*.md
 CLAUDE_*.md
 .claude/
 # Repo de comandes de Claude (submòdul o carpeta clonada)
