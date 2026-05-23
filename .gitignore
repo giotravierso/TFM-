@@ -44,22 +44,20 @@ test-results/
 # Els volums de dades no van al repo
 docker/volumes/
 
-# ── Dades locals (no pujar dades reals ni sintètiques pesades)
-data/synthetic/*.json
+# ── Dades locals ─────────────────────────────────────────────
 data/synthetic/*.csv
 data/policies/*.pdf
-# Excepció: els exemples de demo sí que pugen
-!data/synthetic/example_*.json
-!data/policies/example_*.pdf
+# NOTA: claims_dataset.json i agent_f_xgboost.pkl SÍ van al repo
+# (necessaris per Streamlit Cloud — no contenen dades personals reals)
 
-# ── ChromaDB (vector store local) ────────────────────────────
+# ── ChromaDB (es regenera en runtime, no va al repo) ─────────
+data/chroma/
 chroma/
 chromadb/
 *.chroma
 
 # ── Models descarregats (HuggingFace cache) ──────────────────
 .cache/
-models/
 *.bin
 *.safetensors
 *.onnx

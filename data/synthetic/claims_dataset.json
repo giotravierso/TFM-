@@ -1,0 +1,6549 @@
+[
+  {
+    "claim_id": "EXP-2026-0001",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-94259",
+    "client_name": "ALBANO LLOPIS HIERRO",
+    "conductor_name": "ALBANO LLOPIS HIERRO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Nissan",
+      "model": "Sentra",
+      "year": 2018,
+      "plate": "H61856"
+    },
+    "incident": {
+      "date": "2026-04-28",
+      "time": "04:30",
+      "location": "Av. John F. Kennedy, Santo Domingo",
+      "acta_number": "Q-634277-26",
+      "description": "Colisión en Av. John F. Kennedy, Santo Domingo: Nissan Sentra (H61856) impactó vehículo estacionado."
+    },
+    "financials": {
+      "amount_requested": 173500.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 173500.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 9,
+      "proposal_rejected_before": false,
+      "days_since_incident": 25
+    },
+    "channel": "presencial",
+    "taller": "TechCar Santiago",
+    "compliance": {
+      "fraud_score": 0.15,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0002",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-18326",
+    "client_name": "BUENAVENTURA DE BONET",
+    "conductor_name": "FICTICIO CASTILLO HERRERA MIGUEL ANGEL",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Elantra",
+      "year": 2017,
+      "plate": "G88172"
+    },
+    "incident": {
+      "date": "2026-04-09",
+      "time": "12:45",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-407757-26",
+      "description": "Colisión en Av. 27 de Febrero, Santo Domingo: Hyundai Elantra (G88172) impactó vehículo estacionado."
+    },
+    "financials": {
+      "amount_requested": 615500.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 615500.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 4,
+      "interaction_count": 1,
+      "proposal_rejected_before": false,
+      "days_since_incident": 44
+    },
+    "channel": "presencial",
+    "taller": "Auto Pro Santo Domingo",
+    "compliance": {
+      "fraud_score": 0.25,
+      "confidence": 0.85,
+      "ofac_flagged": true,
+      "due_diligence": "ampliada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0003",
+    "claim_type": "robatori",
+    "policy_number": "SP-PCS-009-23947",
+    "client_name": "ILEANA ANTÓN-ANDRÉS",
+    "conductor_name": "FICTICIO PEREZ ALVARADO IGNACIO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T2 Plus",
+      "year": 2023,
+      "plate": "B76542"
+    },
+    "incident": {
+      "date": "2026-03-18",
+      "time": "20:15",
+      "location": "Av. España, Santo Domingo Este",
+      "acta_number": "Q-945964-26",
+      "description": "Sustracción del Jetour T2 Plus (B76542). Denuncia ante Policía Nacional."
+    },
+    "financials": {
+      "amount_requested": 216200.0,
+      "max_coverage": 800000,
+      "deductible": 10000,
+      "covered": true,
+      "net_payable": 206200.0
+    },
+    "documents": {
+      "required": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "submitted": [
+        "cedula",
+        "licencia_conducir",
+        "denuncia_policial"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 9,
+      "proposal_rejected_before": false,
+      "days_since_incident": 66
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": true,
+      "due_diligence": "ampliada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0004",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-79822",
+    "client_name": "CÉSAR GUERRERO VAZQUEZ",
+    "conductor_name": "CÉSAR GUERRERO VAZQUEZ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Hilux",
+      "year": 2016,
+      "plate": "H19071"
+    },
+    "incident": {
+      "date": "2026-02-02",
+      "time": "04:45",
+      "location": "Av. San Martín, Santo Domingo",
+      "acta_number": "Q-426858-26",
+      "description": "Impacto en parte trasera del Toyota Hilux placa H19071 en Av. San Martín, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 587500.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 495000
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 9,
+      "proposal_rejected_before": false,
+      "days_since_incident": 110
+    },
+    "channel": "email",
+    "taller": "TechCar Santiago",
+    "compliance": {
+      "fraud_score": 0.35,
+      "confidence": 0.82,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0005",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-42493",
+    "client_name": "ALBA MAR FLOR RIVAS",
+    "conductor_name": "JACOBO DEL AGUDO",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "BMW",
+      "model": "X3",
+      "year": 2023,
+      "plate": "H25860"
+    },
+    "incident": {
+      "date": "2026-02-27",
+      "time": "02:30",
+      "location": "Av. España, Santo Domingo Este",
+      "acta_number": "Q-446479-26",
+      "description": "El BMW X3 placa H25860 causó daños a propiedad de tercero en Av. España, Santo Domingo Este."
+    },
+    "financials": {
+      "amount_requested": 38900.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 38900.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 4,
+      "proposal_rejected_before": true,
+      "days_since_incident": 85
+    },
+    "channel": "email",
+    "taller": "Auto Center Pepín",
+    "compliance": {
+      "fraud_score": 0.15,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0006",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-85525",
+    "client_name": "PACO ROCAMORA NIETO",
+    "conductor_name": "PACO ROCAMORA NIETO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Polo",
+      "year": 2018,
+      "plate": "B84847"
+    },
+    "incident": {
+      "date": "2026-05-02",
+      "time": "07:45",
+      "location": "Carretera Mella, Santo Domingo Este",
+      "acta_number": "Q-785197-26",
+      "description": "Asegurado con Volkswagen Polo placa B84847 causó daños materiales a tercero en Carretera Mella, Santo Domingo Este."
+    },
+    "financials": {
+      "amount_requested": 931500.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 931500.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 2,
+      "proposal_rejected_before": false,
+      "days_since_incident": 21
+    },
+    "channel": "phone",
+    "taller": "Auto Center Pepín",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0007",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-34931",
+    "client_name": "CASEMIRO GARRIDO-NAVARRO",
+    "conductor_name": "CASEMIRO GARRIDO-NAVARRO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Nissan",
+      "model": "Sentra",
+      "year": 2016,
+      "plate": "C35112"
+    },
+    "incident": {
+      "date": "2026-05-18",
+      "time": "14:15",
+      "location": "Av. Abraham Lincoln, Santo Domingo",
+      "acta_number": "Q-783823-26",
+      "description": "Colisión frontal del Nissan Sentra placa C35112 en Av. Abraham Lincoln, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 266200.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 261200.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 5
+    },
+    "channel": "presencial",
+    "taller": "Talleres Moca Express",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0008",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-73092",
+    "client_name": "ARTURO PINTO CABALLERO",
+    "conductor_name": "SORAYA NÚÑEZ LAMAS",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T1 Lux",
+      "year": 2017,
+      "plate": "G73653"
+    },
+    "incident": {
+      "date": "2026-02-24",
+      "time": "12:00",
+      "location": "Av. San Martín, Santo Domingo",
+      "acta_number": "Q-921414-26",
+      "description": "Tercero afectado por accidente causado por Jetour T1 Lux (G73653) en Av. San Martín, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 387300.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 387300.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 7,
+      "proposal_rejected_before": false,
+      "days_since_incident": 88
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0009",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-17492",
+    "client_name": "PÁNFILO SEGOVIA CASANOVAS",
+    "conductor_name": "PÁNFILO SEGOVIA CASANOVAS",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Yaris",
+      "year": 2024,
+      "plate": "PP51104"
+    },
+    "incident": {
+      "date": "2026-01-13",
+      "time": "18:45",
+      "location": "Carretera Mella, Santo Domingo Este",
+      "acta_number": "Q-346629-26",
+      "description": "Impacto en parte trasera del Toyota Yaris placa PP51104 en Carretera Mella, Santo Domingo Este."
+    },
+    "financials": {
+      "amount_requested": 315700.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 310700.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 3,
+      "proposal_rejected_before": true,
+      "days_since_incident": 130
+    },
+    "channel": "presencial",
+    "taller": "Talleres Moca Express",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0010",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-20745",
+    "client_name": "ANI MARCOS PARDO",
+    "conductor_name": "ANI MARCOS PARDO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T1 Lux",
+      "year": 2024,
+      "plate": "PP91183"
+    },
+    "incident": {
+      "date": "2026-04-18",
+      "time": "21:30",
+      "location": "Carretera Duarte, Santiago",
+      "acta_number": "Q-888387-26",
+      "description": "Reclamación RC por accidente en Carretera Duarte, Santiago con Jetour T1 Lux placa PP91183."
+    },
+    "financials": {
+      "amount_requested": 2058300.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 2000000
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 6,
+      "proposal_rejected_before": false,
+      "days_since_incident": 35
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.82,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0011",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-44760",
+    "client_name": "CELIA BAÑOS-ARROYO",
+    "conductor_name": "CELIA BAÑOS-ARROYO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Tucson",
+      "year": 2016,
+      "plate": "C76307"
+    },
+    "incident": {
+      "date": "2026-02-03",
+      "time": "11:00",
+      "location": "Av. Rómulo Betancourt, Santo Domingo",
+      "acta_number": "Q-785743-26",
+      "description": "Reclamación RC por accidente en Av. Rómulo Betancourt, Santo Domingo con Hyundai Tucson placa C76307."
+    },
+    "financials": {
+      "amount_requested": 1938000.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 1938000.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 109
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0012",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-24029",
+    "client_name": "ROLANDO DEL BERNAL",
+    "conductor_name": "ROLANDO DEL BERNAL",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Tucson",
+      "year": 2017,
+      "plate": "D25129"
+    },
+    "incident": {
+      "date": "2026-05-22",
+      "time": "04:30",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-765095-26",
+      "description": "Impacto en parte trasera del Hyundai Tucson placa D25129 en Av. 27 de Febrero, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 180400.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 175400.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 6,
+      "proposal_rejected_before": false,
+      "days_since_incident": 1
+    },
+    "channel": "email",
+    "taller": "Auto Center Pepín",
+    "compliance": {
+      "fraud_score": 0.15,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0013",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-82309",
+    "client_name": "TORIBIO DE PINTO",
+    "conductor_name": "FICTICIO GUERRERO SALINAS EDGAR",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Elantra",
+      "year": 2019,
+      "plate": "B67912"
+    },
+    "incident": {
+      "date": "2026-04-20",
+      "time": "17:00",
+      "location": "Carretera Duarte, Santiago",
+      "acta_number": "Q-918011-26",
+      "description": "Asegurado con Hyundai Elantra placa B67912 causó daños materiales a tercero en Carretera Duarte, Santiago."
+    },
+    "financials": {
+      "amount_requested": 142000.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 142000.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "cedula",
+        "acta_policial_certificada",
+        "aviso_siniestro",
+        "acta_conciliacion",
+        "fotos_danos_con_placa",
+        "matricula",
+        "licencia_conducir"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 3,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 33
+    },
+    "channel": "email",
+    "taller": "Talleres Moca Express",
+    "compliance": {
+      "fraud_score": 0.35,
+      "confidence": 0.57,
+      "ofac_flagged": true,
+      "due_diligence": "ampliada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0014",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-64040",
+    "client_name": "JAVI PATIÑO-CÁNOVAS",
+    "conductor_name": "FELICIDAD GALLEGO LASA",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Elantra",
+      "year": 2018,
+      "plate": "B33206"
+    },
+    "incident": {
+      "date": "2026-01-07",
+      "time": "05:30",
+      "location": "Av. Máximo Gómez, Santo Domingo",
+      "acta_number": "Q-309267-26",
+      "description": "Colisión en Av. Máximo Gómez, Santo Domingo: Hyundai Elantra (B33206) impactó vehículo estacionado."
+    },
+    "financials": {
+      "amount_requested": 903000.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 903000.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 136
+    },
+    "channel": "email",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0015",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-35313",
+    "client_name": "MARCO DONOSO HIERRO",
+    "conductor_name": "MARCO DONOSO HIERRO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T1 Lux",
+      "year": 2018,
+      "plate": "PP96511"
+    },
+    "incident": {
+      "date": "2026-04-13",
+      "time": "10:30",
+      "location": "Carretera Duarte, Santiago",
+      "acta_number": "Q-128941-26",
+      "description": "Reclamación RC por accidente en Carretera Duarte, Santiago con Jetour T1 Lux placa PP96511."
+    },
+    "financials": {
+      "amount_requested": 1905600.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 1905600.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 3,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 40
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.25,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0016",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-66959",
+    "client_name": "JERÓNIMO PINO LERMA",
+    "conductor_name": "CONSTANZA DEL BARBA",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T2 Plus",
+      "year": 2015,
+      "plate": "A88193"
+    },
+    "incident": {
+      "date": "2026-03-30",
+      "time": "23:30",
+      "location": "Carretera Sánchez, Baní",
+      "acta_number": "Q-945687-26",
+      "description": "Asegurado con Jetour T2 Plus placa A88193 causó daños materiales a tercero en Carretera Sánchez, Baní."
+    },
+    "financials": {
+      "amount_requested": 510300.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 510300.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 4,
+      "interaction_count": 2,
+      "proposal_rejected_before": false,
+      "days_since_incident": 54
+    },
+    "channel": "email",
+    "taller": "Auto Center Pepín",
+    "compliance": {
+      "fraud_score": 0.25,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0017",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-97062",
+    "client_name": "SEGISMUNDO DE MOLES",
+    "conductor_name": "SEGISMUNDO DE MOLES",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Kia",
+      "model": "Cerato",
+      "year": 2020,
+      "plate": "G19171"
+    },
+    "incident": {
+      "date": "2026-03-26",
+      "time": "19:30",
+      "location": "Av. Máximo Gómez, Santo Domingo",
+      "acta_number": "Q-540869-26",
+      "description": "Asegurado con Kia Cerato placa G19171 causó daños materiales a tercero en Av. Máximo Gómez, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 767900.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 767900.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 58
+    },
+    "channel": "email",
+    "taller": "Centro Automotriz del Este",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0018",
+    "claim_type": "robatori",
+    "policy_number": "SP-PCS-009-81819",
+    "client_name": "EDELMIRA BATALLA GALVÁN",
+    "conductor_name": "VALENTINA MIRANDA-GARCIA",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Kia",
+      "model": "Sportage",
+      "year": 2024,
+      "plate": "D63225"
+    },
+    "incident": {
+      "date": "2026-01-01",
+      "time": "09:30",
+      "location": "Malecón, Santo Domingo",
+      "acta_number": "Q-934692-26",
+      "description": "Hurto parcial de piezas del Kia Sportage placa D63225 estacionado en Malecón, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 259700.0,
+      "max_coverage": 800000,
+      "deductible": 10000,
+      "covered": true,
+      "net_payable": 249700.0
+    },
+    "documents": {
+      "required": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "submitted": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 6,
+      "proposal_rejected_before": false,
+      "days_since_incident": 142
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0019",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-40784",
+    "client_name": "GERTRUDIS SEGARRA CLAVERO",
+    "conductor_name": "GERTRUDIS SEGARRA CLAVERO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5",
+      "year": 2024,
+      "plate": "E22240"
+    },
+    "incident": {
+      "date": "2026-03-21",
+      "time": "07:15",
+      "location": "Av. Independencia, Santo Domingo",
+      "acta_number": "Q-303880-26",
+      "description": "Tercero afectado por accidente causado por Mazda CX-5 (E22240) en Av. Independencia, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 349800.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 349800.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 8,
+      "proposal_rejected_before": false,
+      "days_since_incident": 63
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0020",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-33053",
+    "client_name": "BUENAVENTURA HUERTA-JÓDAR",
+    "conductor_name": "BUENAVENTURA HUERTA-JÓDAR",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Corolla",
+      "year": 2016,
+      "plate": "G38683"
+    },
+    "incident": {
+      "date": "2026-05-13",
+      "time": "14:00",
+      "location": "Autopista Duarte, km 15",
+      "acta_number": "Q-371782-26",
+      "description": "Vuelco del Toyota Corolla (G38683) al perder el control en Autopista Duarte, km 15."
+    },
+    "financials": {
+      "amount_requested": 349100.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 344100.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller",
+        "licencia_conducir"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 2,
+      "proposal_rejected_before": false,
+      "days_since_incident": 10
+    },
+    "channel": "phone",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.2,
+      "confidence": 0.57,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0021",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-67654",
+    "client_name": "INÉS PUJOL-PAREDES",
+    "conductor_name": "INÉS PUJOL-PAREDES",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5",
+      "year": 2022,
+      "plate": "C45992"
+    },
+    "incident": {
+      "date": "2026-01-20",
+      "time": "22:30",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-535020-26",
+      "description": "Impacto en parte trasera del Mazda CX-5 placa C45992 en Av. 27 de Febrero, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 151500.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 146500.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 9,
+      "proposal_rejected_before": true,
+      "days_since_incident": 123
+    },
+    "channel": "email",
+    "taller": "TechCar Santiago",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0022",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-86556",
+    "client_name": "BRUNO DEL BOU",
+    "conductor_name": "BRUNO DEL BOU",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Yaris",
+      "year": 2018,
+      "plate": "G61049"
+    },
+    "incident": {
+      "date": "2026-01-06",
+      "time": "18:45",
+      "location": "Av. Las Carreras, Santiago",
+      "acta_number": "Q-452457-26",
+      "description": "Impacto en parte trasera del Toyota Yaris placa G61049 en Av. Las Carreras, Santiago."
+    },
+    "financials": {
+      "amount_requested": 299900.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 294900.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "fotos_danos",
+        "cotizacion_taller",
+        "acta_policial",
+        "cedula"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 3,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 137
+    },
+    "channel": "email",
+    "taller": "Auto Center Pepín",
+    "compliance": {
+      "fraud_score": 0.35,
+      "confidence": 0.57,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0023",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-87580",
+    "client_name": "TITO CANALS CORONADO",
+    "conductor_name": "TITO CANALS CORONADO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Elantra",
+      "year": 2024,
+      "plate": "PP61645"
+    },
+    "incident": {
+      "date": "2026-01-07",
+      "time": "02:45",
+      "location": "Av. Winston Churchill, Santo Domingo",
+      "acta_number": "Q-888539-26",
+      "description": "Impacto en parte trasera del Hyundai Elantra placa PP61645 en Av. Winston Churchill, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 91000.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 86000.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 1,
+      "proposal_rejected_before": false,
+      "days_since_incident": 136
+    },
+    "channel": "phone",
+    "taller": "Taller Hernández e Hijos",
+    "compliance": {
+      "fraud_score": 0.15,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0024",
+    "claim_type": "danys_mecanics",
+    "policy_number": "SP-PCS-009-39389",
+    "client_name": "RUY ROCA BARTOLOMÉ",
+    "conductor_name": "RUY ROCA BARTOLOMÉ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Corolla",
+      "year": 2023,
+      "plate": "PP55870"
+    },
+    "incident": {
+      "date": "2026-01-18",
+      "time": "20:00",
+      "location": "Autopista Duarte, km 15",
+      "acta_number": null,
+      "description": "Falla mecánica en motor del Toyota Corolla placa PP55870. Solicita cobertura por avería."
+    },
+    "financials": {
+      "amount_requested": 61600.0,
+      "max_coverage": 0,
+      "deductible": 0,
+      "covered": false,
+      "net_payable": 0.0
+    },
+    "documents": {
+      "required": [],
+      "submitted": [],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 3,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 125
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.25,
+      "confidence": 0.99,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "reject",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0025",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-89593",
+    "client_name": "FRANCISCA SOLÉ ÁNGEL",
+    "conductor_name": "FRANCISCA SOLÉ ÁNGEL",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T2 Plus",
+      "year": 2020,
+      "plate": "B89415"
+    },
+    "incident": {
+      "date": "2026-01-30",
+      "time": "05:30",
+      "location": "Av. Máximo Gómez, Santo Domingo",
+      "acta_number": "Q-206851-26",
+      "description": "Tercero afectado por accidente causado por Jetour T2 Plus (B89415) en Av. Máximo Gómez, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 264600.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 264600.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "licencia_conducir",
+        "acta_policial",
+        "aviso_siniestro"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 113
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0026",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-79827",
+    "client_name": "LEONEL ALBERDI-CARBÓ",
+    "conductor_name": "PILI DEL NIETO",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Tucson",
+      "year": 2024,
+      "plate": "PP55508"
+    },
+    "incident": {
+      "date": "2026-04-20",
+      "time": "21:30",
+      "location": "Av. Independencia, Santo Domingo",
+      "acta_number": "Q-947458-26",
+      "description": "Asegurado con Hyundai Tucson placa PP55508 causó daños materiales a tercero en Av. Independencia, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 93300.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 93300.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "cedula",
+        "acta_conciliacion",
+        "matricula",
+        "presupuesto_piezas",
+        "acta_policial_certificada",
+        "fotos_danos_con_placa",
+        "aviso_siniestro"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 1,
+      "proposal_rejected_before": false,
+      "days_since_incident": 33
+    },
+    "channel": "phone",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0027",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-46559",
+    "client_name": "EUGENIO ROYO CRUZ",
+    "conductor_name": "EUGENIO ROYO CRUZ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T2 Plus",
+      "year": 2020,
+      "plate": "C21359"
+    },
+    "incident": {
+      "date": "2026-04-26",
+      "time": "07:45",
+      "location": "Av. San Martín, Santo Domingo",
+      "acta_number": "Q-389688-26",
+      "description": "Reclamación RC por accidente en Av. San Martín, Santo Domingo con Jetour T2 Plus placa C21359."
+    },
+    "financials": {
+      "amount_requested": 1266600.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 1266600.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "licencia_conducir",
+        "acta_policial",
+        "fotos_danos",
+        "cedula"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 6,
+      "proposal_rejected_before": true,
+      "days_since_incident": 27
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0028",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-41499",
+    "client_name": "ABRIL LAGO VALLE",
+    "conductor_name": "ABRIL LAGO VALLE",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T1 Lux",
+      "year": 2021,
+      "plate": "H82768"
+    },
+    "incident": {
+      "date": "2026-05-02",
+      "time": "20:45",
+      "location": "Carretera Sánchez, Baní",
+      "acta_number": "Q-656711-26",
+      "description": "Choque contra poste de alumbrado en Carretera Sánchez, Baní. Jetour T1 Lux placa H82768."
+    },
+    "financials": {
+      "amount_requested": 282300.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 277300.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 21
+    },
+    "channel": "email",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0029",
+    "claim_type": "robatori",
+    "policy_number": "SP-PCS-009-50189",
+    "client_name": "JOSÉ LUIS CAMINO MARTÍN",
+    "conductor_name": "JOSÉ LUIS CAMINO MARTÍN",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Nissan",
+      "model": "Sentra",
+      "year": 2020,
+      "plate": "H45509"
+    },
+    "incident": {
+      "date": "2026-03-06",
+      "time": "07:00",
+      "location": "Av. Winston Churchill, Santo Domingo",
+      "acta_number": "Q-859782-26",
+      "description": "Hurto parcial de piezas del Nissan Sentra placa H45509 estacionado en Av. Winston Churchill, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 648200.0,
+      "max_coverage": 800000,
+      "deductible": 10000,
+      "covered": true,
+      "net_payable": 638200.0
+    },
+    "documents": {
+      "required": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "submitted": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 9,
+      "proposal_rejected_before": false,
+      "days_since_incident": 78
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0030",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-39816",
+    "client_name": "MARÍA FERNANDA FLOR",
+    "conductor_name": "GLAUCO CUÉLLAR ABASCAL",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Mitsubishi",
+      "model": "Outlander",
+      "year": 2016,
+      "plate": "C48829"
+    },
+    "incident": {
+      "date": "2026-04-03",
+      "time": "05:30",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-112861-26",
+      "description": "Choque contra poste de alumbrado en Av. 27 de Febrero, Santo Domingo. Mitsubishi Outlander placa C48829."
+    },
+    "financials": {
+      "amount_requested": 16700.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 11700.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 5,
+      "proposal_rejected_before": true,
+      "days_since_incident": 50
+    },
+    "channel": "email",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0031",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-24953",
+    "client_name": "ETELVINA LAURA ALIAGA CAPARRÓS",
+    "conductor_name": "ETELVINA LAURA ALIAGA CAPARRÓS",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Kia",
+      "model": "Sportage",
+      "year": 2015,
+      "plate": "D72616"
+    },
+    "incident": {
+      "date": "2026-01-17",
+      "time": "12:45",
+      "location": "Av. Rómulo Betancourt, Santo Domingo",
+      "acta_number": "Q-647957-26",
+      "description": "Impacto en parte trasera del Kia Sportage placa D72616 en Av. Rómulo Betancourt, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 53300.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 48300.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "cotizacion_taller",
+        "licencia_conducir"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 1,
+      "proposal_rejected_before": false,
+      "days_since_incident": 126
+    },
+    "channel": "presencial",
+    "taller": "TechCar Santiago",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0032",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-23006",
+    "client_name": "VALERIA MELÉNDEZ HERAS",
+    "conductor_name": "VALERIA MELÉNDEZ HERAS",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Explorer",
+      "year": 2019,
+      "plate": "PP89905"
+    },
+    "incident": {
+      "date": "2026-02-23",
+      "time": "20:15",
+      "location": "Av. Winston Churchill, Santo Domingo",
+      "acta_number": "Q-134225-26",
+      "description": "El Ford Explorer placa PP89905 causó daños a propiedad de tercero en Av. Winston Churchill, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 315400.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 315400.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 89
+    },
+    "channel": "email",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0033",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-91927",
+    "client_name": "DIONISIO BERMÚDEZ BOADA",
+    "conductor_name": "DIONISIO BERMÚDEZ BOADA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "BMW",
+      "model": "X3",
+      "year": 2016,
+      "plate": "C44675"
+    },
+    "incident": {
+      "date": "2026-02-20",
+      "time": "13:00",
+      "location": "Autopista Duarte, km 15",
+      "acta_number": "Q-230394-26",
+      "description": "Colisión en Autopista Duarte, km 15: BMW X3 (C44675) impactó vehículo estacionado."
+    },
+    "financials": {
+      "amount_requested": 633100.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 633100.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 92
+    },
+    "channel": "email",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0034",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-20543",
+    "client_name": "SABINA BAYÓN CASAS",
+    "conductor_name": "SABINA BAYÓN CASAS",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T2 Plus",
+      "year": 2023,
+      "plate": "H67377"
+    },
+    "incident": {
+      "date": "2026-01-11",
+      "time": "13:30",
+      "location": "Carretera Mella, Santo Domingo Este",
+      "acta_number": "Q-953797-26",
+      "description": "Colisión en Carretera Mella, Santo Domingo Este: Jetour T2 Plus (H67377) impactó vehículo estacionado."
+    },
+    "financials": {
+      "amount_requested": 700200.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 700200.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "fotos_danos_con_placa",
+        "licencia_conducir",
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "presupuesto_piezas",
+        "acta_conciliacion",
+        "cedula"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 132
+    },
+    "channel": "presencial",
+    "taller": "Taller Hernández e Hijos",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0035",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-23710",
+    "client_name": "NARCISO TALAVERA DALMAU",
+    "conductor_name": "JUAN LUIS ROCHA-GALÁN",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Explorer",
+      "year": 2020,
+      "plate": "E97835"
+    },
+    "incident": {
+      "date": "2026-02-11",
+      "time": "10:45",
+      "location": "Carretera Duarte, Santiago",
+      "acta_number": "Q-221552-26",
+      "description": "Tercero afectado por accidente causado por Ford Explorer (E97835) en Carretera Duarte, Santiago."
+    },
+    "financials": {
+      "amount_requested": 1535300.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 1535300.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 7,
+      "proposal_rejected_before": false,
+      "days_since_incident": 101
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0036",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-17104",
+    "client_name": "PRISCILA DE MESA",
+    "conductor_name": "NAZARET PEREA RÍOS",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Corolla",
+      "year": 2023,
+      "plate": "H64165"
+    },
+    "incident": {
+      "date": "2026-02-18",
+      "time": "16:30",
+      "location": "Malecón, Santo Domingo",
+      "acta_number": "Q-832168-26",
+      "description": "Colisión en Malecón, Santo Domingo: Toyota Corolla (H64165) impactó vehículo estacionado."
+    },
+    "financials": {
+      "amount_requested": 721700.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 721700.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 8,
+      "proposal_rejected_before": false,
+      "days_since_incident": 94
+    },
+    "channel": "phone",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0037",
+    "claim_type": "danys_mecanics",
+    "policy_number": "SP-PCS-009-11792",
+    "client_name": "JENNIFER CARRILLO",
+    "conductor_name": "JENNIFER CARRILLO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T1 Lux",
+      "year": 2017,
+      "plate": "D82199"
+    },
+    "incident": {
+      "date": "2026-05-22",
+      "time": "13:00",
+      "location": "Autopista Duarte, km 15",
+      "acta_number": null,
+      "description": "Daño por desgaste en transmisión del Jetour T1 Lux (D82199). No derivado de accidente."
+    },
+    "financials": {
+      "amount_requested": 21900.0,
+      "max_coverage": 0,
+      "deductible": 0,
+      "covered": false,
+      "net_payable": 0.0
+    },
+    "documents": {
+      "required": [],
+      "submitted": [],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 2,
+      "proposal_rejected_before": false,
+      "days_since_incident": 1
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.99,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "reject",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0038",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-82255",
+    "client_name": "DANIEL DE NEIRA",
+    "conductor_name": "DANIEL DE NEIRA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Polo",
+      "year": 2022,
+      "plate": "C69871"
+    },
+    "incident": {
+      "date": "2026-02-07",
+      "time": "12:15",
+      "location": "Av. España, Santo Domingo Este",
+      "acta_number": "Q-102689-26",
+      "description": "Colisión en Av. España, Santo Domingo Este: Volkswagen Polo (C69871) impactó vehículo estacionado."
+    },
+    "financials": {
+      "amount_requested": 1061300.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 1000000
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 105
+    },
+    "channel": "presencial",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.82,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0039",
+    "claim_type": "robatori",
+    "policy_number": "SP-PCS-009-73483",
+    "client_name": "MACARIO GRAU GIMÉNEZ",
+    "conductor_name": "MACARIO GRAU GIMÉNEZ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Polo",
+      "year": 2017,
+      "plate": "H80592"
+    },
+    "incident": {
+      "date": "2026-03-30",
+      "time": "10:45",
+      "location": "Av. Las Carreras, Santiago",
+      "acta_number": "Q-145767-26",
+      "description": "Sustracción del Volkswagen Polo (H80592). Denuncia ante Policía Nacional."
+    },
+    "financials": {
+      "amount_requested": 446100.0,
+      "max_coverage": 800000,
+      "deductible": 10000,
+      "covered": true,
+      "net_payable": 436100.0
+    },
+    "documents": {
+      "required": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "submitted": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 54
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0040",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-14852",
+    "client_name": "ANDRÉS FELIPE BARRAL GRANADOS",
+    "conductor_name": "ANDRÉS FELIPE BARRAL GRANADOS",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Chevrolet",
+      "model": "Trax",
+      "year": 2021,
+      "plate": "B74923"
+    },
+    "incident": {
+      "date": "2026-02-02",
+      "time": "16:30",
+      "location": "Carretera Duarte, Santiago",
+      "acta_number": "Q-753534-26",
+      "description": "Impacto en parte trasera del Chevrolet Trax placa B74923 en Carretera Duarte, Santiago."
+    },
+    "financials": {
+      "amount_requested": 540300.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 495000
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "cotizacion_taller",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "formulario_aviso_accidente"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 8,
+      "proposal_rejected_before": true,
+      "days_since_incident": 110
+    },
+    "channel": "email",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.4,
+      "confidence": 0.5,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0041",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-14705",
+    "client_name": "VÍCTOR ANGULO MURILLO",
+    "conductor_name": "VÍCTOR ANGULO MURILLO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Chevrolet",
+      "model": "Trax",
+      "year": 2020,
+      "plate": "H80912"
+    },
+    "incident": {
+      "date": "2026-01-18",
+      "time": "07:30",
+      "location": "Av. San Martín, Santo Domingo",
+      "acta_number": "Q-414012-26",
+      "description": "Colisión frontal del Chevrolet Trax placa H80912 en Av. San Martín, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 618400.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 495000
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 7,
+      "proposal_rejected_before": false,
+      "days_since_incident": 125
+    },
+    "channel": "phone",
+    "taller": "Centro Automotriz del Este",
+    "compliance": {
+      "fraud_score": 0.2,
+      "confidence": 0.82,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0042",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-29080",
+    "client_name": "JOSÉ ÁNGEL GÁRATE LOPEZ",
+    "conductor_name": "JOSÉ ÁNGEL GÁRATE LOPEZ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Mitsubishi",
+      "model": "Outlander",
+      "year": 2020,
+      "plate": "E66450"
+    },
+    "incident": {
+      "date": "2026-03-04",
+      "time": "16:45",
+      "location": "Malecón, Santo Domingo",
+      "acta_number": "Q-711484-26",
+      "description": "Vuelco del Mitsubishi Outlander (E66450) al perder el control en Malecón, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 354300.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 349300.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 80
+    },
+    "channel": "email",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0043",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-47700",
+    "client_name": "CLOTILDE CATALÁN SUÁREZ",
+    "conductor_name": "CLOTILDE CATALÁN SUÁREZ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "BMW",
+      "model": "X3",
+      "year": 2019,
+      "plate": "PP70981"
+    },
+    "incident": {
+      "date": "2026-05-20",
+      "time": "05:00",
+      "location": "Av. Las Carreras, Santiago",
+      "acta_number": "Q-994787-26",
+      "description": "Impacto en parte trasera del BMW X3 placa PP70981 en Av. Las Carreras, Santiago."
+    },
+    "financials": {
+      "amount_requested": 278300.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 273300.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 3
+    },
+    "channel": "email",
+    "taller": "TechCar Santiago",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0044",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-12875",
+    "client_name": "RUBEN DEL RAMÍREZ",
+    "conductor_name": "RUBEN DEL RAMÍREZ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Honda",
+      "model": "CR-V",
+      "year": 2024,
+      "plate": "D48696"
+    },
+    "incident": {
+      "date": "2026-04-12",
+      "time": "08:00",
+      "location": "Av. Independencia, Santo Domingo",
+      "acta_number": "Q-940886-26",
+      "description": "Colisión en Av. Independencia, Santo Domingo: Honda CR-V (D48696) impactó vehículo estacionado."
+    },
+    "financials": {
+      "amount_requested": 657300.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 657300.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 1,
+      "proposal_rejected_before": false,
+      "days_since_incident": 41
+    },
+    "channel": "presencial",
+    "taller": "TechCar Santiago",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0045",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-94717",
+    "client_name": "ASDRUBAL CABALLERO",
+    "conductor_name": "ASDRUBAL CABALLERO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T2 Plus",
+      "year": 2017,
+      "plate": "A92242"
+    },
+    "incident": {
+      "date": "2026-01-11",
+      "time": "09:45",
+      "location": "Av. Rómulo Betancourt, Santo Domingo",
+      "acta_number": "Q-665610-26",
+      "description": "Choque contra poste de alumbrado en Av. Rómulo Betancourt, Santo Domingo. Jetour T2 Plus placa A92242."
+    },
+    "financials": {
+      "amount_requested": 28400.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 23400.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 3,
+      "proposal_rejected_before": true,
+      "days_since_incident": 132
+    },
+    "channel": "phone",
+    "taller": "Centro Automotriz del Este",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0046",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-54396",
+    "client_name": "FELICIDAD RODA REIG",
+    "conductor_name": "FELICIDAD RODA REIG",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Kia",
+      "model": "Sportage",
+      "year": 2019,
+      "plate": "H48684"
+    },
+    "incident": {
+      "date": "2026-01-30",
+      "time": "14:00",
+      "location": "Av. Independencia, Santo Domingo",
+      "acta_number": "Q-499534-26",
+      "description": "Asegurado con Kia Sportage placa H48684 causó daños materiales a tercero en Av. Independencia, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 174800.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 174800.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "acta_policial_certificada",
+        "cedula",
+        "presupuesto_piezas",
+        "aviso_siniestro",
+        "acta_conciliacion",
+        "matricula"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 3,
+      "interaction_count": 7,
+      "proposal_rejected_before": false,
+      "days_since_incident": 113
+    },
+    "channel": "email",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.35,
+      "confidence": 0.57,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0047",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-83584",
+    "client_name": "TERESA BALAGUER CABELLO",
+    "conductor_name": "HERIBERTO NICOLAU CANALES",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T1 Lux",
+      "year": 2022,
+      "plate": "PP91205"
+    },
+    "incident": {
+      "date": "2026-03-25",
+      "time": "19:15",
+      "location": "Av. Winston Churchill, Santo Domingo",
+      "acta_number": "Q-616554-26",
+      "description": "El Jetour T1 Lux placa PP91205 causó daños a propiedad de tercero en Av. Winston Churchill, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 750100.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 750100.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 8,
+      "proposal_rejected_before": false,
+      "days_since_incident": 59
+    },
+    "channel": "phone",
+    "taller": "Auto Center Pepín",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0048",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-97881",
+    "client_name": "CLEMENTE DE SANABRIA",
+    "conductor_name": "CLEMENTE DE SANABRIA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Elantra",
+      "year": 2021,
+      "plate": "H58629"
+    },
+    "incident": {
+      "date": "2026-05-19",
+      "time": "13:15",
+      "location": "Carretera Mella, Santo Domingo Este",
+      "acta_number": "Q-485178-26",
+      "description": "Asegurado con Hyundai Elantra placa H58629 causó daños materiales a tercero en Carretera Mella, Santo Domingo Este."
+    },
+    "financials": {
+      "amount_requested": 1019900.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 1000000
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "matricula",
+        "acta_conciliacion",
+        "acta_policial_certificada",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 8,
+      "proposal_rejected_before": false,
+      "days_since_incident": 4
+    },
+    "channel": "presencial",
+    "taller": "Talleres Moca Express",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.54,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0049",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-26011",
+    "client_name": "HÉCTOR ESPAÑOL LOPEZ",
+    "conductor_name": "DIANA BENET SALAZAR",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Yaris",
+      "year": 2021,
+      "plate": "D34878"
+    },
+    "incident": {
+      "date": "2026-04-27",
+      "time": "02:15",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-970127-26",
+      "description": "Vuelco del Toyota Yaris (D34878) al perder el control en Av. 27 de Febrero, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 400700.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 395700.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 1,
+      "proposal_rejected_before": true,
+      "days_since_incident": 26
+    },
+    "channel": "presencial",
+    "taller": "TechCar Santiago",
+    "compliance": {
+      "fraud_score": 0.15,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0050",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-10371",
+    "client_name": "ARIEL DE ALCOLEA",
+    "conductor_name": "ARIEL DE ALCOLEA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T1 Lux",
+      "year": 2020,
+      "plate": "B88116"
+    },
+    "incident": {
+      "date": "2026-03-12",
+      "time": "04:15",
+      "location": "Av. Independencia, Santo Domingo",
+      "acta_number": "Q-439498-26",
+      "description": "Colisión frontal del Jetour T1 Lux placa B88116 en Av. Independencia, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 338600.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 333600.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 2,
+      "proposal_rejected_before": false,
+      "days_since_incident": 72
+    },
+    "channel": "email",
+    "taller": "TechCar Santiago",
+    "compliance": {
+      "fraud_score": 0.15,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0051",
+    "claim_type": "danys_mecanics",
+    "policy_number": "SP-PCS-009-72422",
+    "client_name": "RENATO GUZMÁN DELGADO",
+    "conductor_name": "RENATO GUZMÁN DELGADO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Explorer",
+      "year": 2023,
+      "plate": "A18330"
+    },
+    "incident": {
+      "date": "2026-04-25",
+      "time": "11:00",
+      "location": "Av. Winston Churchill, Santo Domingo",
+      "acta_number": null,
+      "description": "Daño por desgaste en transmisión del Ford Explorer (A18330). No derivado de accidente."
+    },
+    "financials": {
+      "amount_requested": 38900.0,
+      "max_coverage": 0,
+      "deductible": 0,
+      "covered": false,
+      "net_payable": 0.0
+    },
+    "documents": {
+      "required": [],
+      "submitted": [],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 1,
+      "proposal_rejected_before": false,
+      "days_since_incident": 28
+    },
+    "channel": "presencial",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.99,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "reject",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0052",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-68138",
+    "client_name": "JULIETA TERUEL GARCÍA",
+    "conductor_name": "FICTICIO LUNA CAMPOS RAUL ERNESTO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Chevrolet",
+      "model": "Trax",
+      "year": 2021,
+      "plate": "A74260"
+    },
+    "incident": {
+      "date": "2026-01-19",
+      "time": "02:30",
+      "location": "Autopista Duarte, km 15",
+      "acta_number": "Q-630108-26",
+      "description": "Asegurado con Chevrolet Trax placa A74260 causó daños materiales a tercero en Autopista Duarte, km 15."
+    },
+    "financials": {
+      "amount_requested": 705400.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 705400.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 124
+    },
+    "channel": "phone",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.15,
+      "confidence": 0.9,
+      "ofac_flagged": true,
+      "due_diligence": "ampliada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0053",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-69186",
+    "client_name": "YAIZA BARRAL CÓZAR",
+    "conductor_name": "YAIZA BARRAL CÓZAR",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Tucson",
+      "year": 2023,
+      "plate": "C66370"
+    },
+    "incident": {
+      "date": "2026-02-28",
+      "time": "13:30",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-195656-26",
+      "description": "Colisión frontal del Hyundai Tucson placa C66370 en Av. 27 de Febrero, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 514400.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 495000
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 2,
+      "proposal_rejected_before": false,
+      "days_since_incident": 84
+    },
+    "channel": "email",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.2,
+      "confidence": 0.82,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0054",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-83608",
+    "client_name": "ABRIL PORTERO LARA",
+    "conductor_name": "ABRIL PORTERO LARA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Honda",
+      "model": "CR-V",
+      "year": 2017,
+      "plate": "PP86869"
+    },
+    "incident": {
+      "date": "2026-03-26",
+      "time": "21:00",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-705991-26",
+      "description": "Asegurado con Honda CR-V placa PP86869 causó daños materiales a tercero en Av. 27 de Febrero, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 481300.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 481300.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 7,
+      "proposal_rejected_before": false,
+      "days_since_incident": 58
+    },
+    "channel": "presencial",
+    "taller": "Auto Pro Santo Domingo",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0055",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-58176",
+    "client_name": "ELOÍSA ROCHA TORRECILLA",
+    "conductor_name": "ELOÍSA ROCHA TORRECILLA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T1 Lux",
+      "year": 2016,
+      "plate": "E82910"
+    },
+    "incident": {
+      "date": "2026-01-30",
+      "time": "08:15",
+      "location": "Av. Abraham Lincoln, Santo Domingo",
+      "acta_number": "Q-290217-26",
+      "description": "Vuelco del Jetour T1 Lux (E82910) al perder el control en Av. Abraham Lincoln, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 502000.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 495000
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 9,
+      "proposal_rejected_before": true,
+      "days_since_incident": 113
+    },
+    "channel": "presencial",
+    "taller": "Auto Pro Santo Domingo",
+    "compliance": {
+      "fraud_score": 0.4,
+      "confidence": 0.5,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0056",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-38197",
+    "client_name": "CLAUDIO MARTIN GELABERT",
+    "conductor_name": "CLAUDIO MARTIN GELABERT",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Elantra",
+      "year": 2015,
+      "plate": "A79531"
+    },
+    "incident": {
+      "date": "2026-04-07",
+      "time": "13:45",
+      "location": "Av. Rómulo Betancourt, Santo Domingo",
+      "acta_number": "Q-747850-26",
+      "description": "Colisión frontal del Hyundai Elantra placa A79531 en Av. Rómulo Betancourt, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 216600.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 211600.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 6,
+      "proposal_rejected_before": false,
+      "days_since_incident": 46
+    },
+    "channel": "email",
+    "taller": "Centro Automotriz del Este",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0057",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-45804",
+    "client_name": "LUIS MIGUEL BARRERA MIR",
+    "conductor_name": "LUIS MIGUEL BARRERA MIR",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Explorer",
+      "year": 2022,
+      "plate": "H64287"
+    },
+    "incident": {
+      "date": "2026-02-25",
+      "time": "16:00",
+      "location": "Av. Abraham Lincoln, Santo Domingo",
+      "acta_number": "Q-314353-26",
+      "description": "Colisión en Av. Abraham Lincoln, Santo Domingo: Ford Explorer (H64287) impactó vehículo estacionado."
+    },
+    "financials": {
+      "amount_requested": 406800.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 406800.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 8,
+      "proposal_rejected_before": false,
+      "days_since_incident": 87
+    },
+    "channel": "email",
+    "taller": "Auto Center Pepín",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0058",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-11013",
+    "client_name": "AMADOR TAPIA VALVERDE",
+    "conductor_name": "CAMILA BARBERÁ",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T2 Plus",
+      "year": 2019,
+      "plate": "E25726"
+    },
+    "incident": {
+      "date": "2026-05-08",
+      "time": "23:45",
+      "location": "Av. Independencia, Santo Domingo",
+      "acta_number": "Q-550137-26",
+      "description": "Asegurado con Jetour T2 Plus placa E25726 causó daños materiales a tercero en Av. Independencia, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 214400.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 214400.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "acta_policial_certificada",
+        "presupuesto_piezas",
+        "matricula",
+        "aviso_siniestro",
+        "cedula",
+        "fotos_danos_con_placa"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 15
+    },
+    "channel": "phone",
+    "taller": "Auto Pro Santo Domingo",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0059",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-52568",
+    "client_name": "ANITA ESTEVEZ",
+    "conductor_name": "ANITA ESTEVEZ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Mitsubishi",
+      "model": "Outlander",
+      "year": 2016,
+      "plate": "G12733"
+    },
+    "incident": {
+      "date": "2026-02-13",
+      "time": "19:45",
+      "location": "Av. Las Carreras, Santiago",
+      "acta_number": "Q-425346-26",
+      "description": "Choque contra poste de alumbrado en Av. Las Carreras, Santiago. Mitsubishi Outlander placa G12733."
+    },
+    "financials": {
+      "amount_requested": 517200.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 495000
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 2,
+      "proposal_rejected_before": false,
+      "days_since_incident": 99
+    },
+    "channel": "phone",
+    "taller": "Talleres Moca Express",
+    "compliance": {
+      "fraud_score": 0.3,
+      "confidence": 0.77,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0060",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-76840",
+    "client_name": "MANUEL BAYO GUTIERREZ",
+    "conductor_name": "MANUEL BAYO GUTIERREZ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Hilux",
+      "year": 2023,
+      "plate": "A79547"
+    },
+    "incident": {
+      "date": "2026-02-19",
+      "time": "11:30",
+      "location": "Av. John F. Kennedy, Santo Domingo",
+      "acta_number": "Q-910389-26",
+      "description": "Asegurado con Toyota Hilux placa A79547 causó daños materiales a tercero en Av. John F. Kennedy, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 840600.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 840600.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 93
+    },
+    "channel": "email",
+    "taller": "Talleres Moca Express",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0061",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-51436",
+    "client_name": "AZENETH HOZ ARIÑO",
+    "conductor_name": "AZENETH HOZ ARIÑO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "BMW",
+      "model": "X3",
+      "year": 2024,
+      "plate": "E92210"
+    },
+    "incident": {
+      "date": "2026-02-08",
+      "time": "14:00",
+      "location": "Av. Abraham Lincoln, Santo Domingo",
+      "acta_number": "Q-486649-26",
+      "description": "Choque contra poste de alumbrado en Av. Abraham Lincoln, Santo Domingo. BMW X3 placa E92210."
+    },
+    "financials": {
+      "amount_requested": 295000.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 290000.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 104
+    },
+    "channel": "email",
+    "taller": "Auto Center Pepín",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0062",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-86064",
+    "client_name": "ANITA HORTENSIA YÁÑEZ MOLINA",
+    "conductor_name": "ANITA HORTENSIA YÁÑEZ MOLINA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Hilux",
+      "year": 2024,
+      "plate": "G70648"
+    },
+    "incident": {
+      "date": "2026-05-22",
+      "time": "23:00",
+      "location": "Av. Rómulo Betancourt, Santo Domingo",
+      "acta_number": "Q-978053-26",
+      "description": "Choque contra poste de alumbrado en Av. Rómulo Betancourt, Santo Domingo. Toyota Hilux placa G70648."
+    },
+    "financials": {
+      "amount_requested": 283200.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 278200.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 1
+    },
+    "channel": "email",
+    "taller": "Talleres Moca Express",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0063",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-67595",
+    "client_name": "CRISTIAN MIRALLES-GÓMEZ",
+    "conductor_name": "HECTOR CASTRO-MARÍN",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Kia",
+      "model": "Sportage",
+      "year": 2015,
+      "plate": "C67377"
+    },
+    "incident": {
+      "date": "2026-05-15",
+      "time": "16:15",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-445705-26",
+      "description": "Colisión frontal del Kia Sportage placa C67377 en Av. 27 de Febrero, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 230700.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 225700.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 7,
+      "proposal_rejected_before": false,
+      "days_since_incident": 8
+    },
+    "channel": "phone",
+    "taller": "Auto Pro Santo Domingo",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0064",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-20682",
+    "client_name": "ESTELA BELMONTE AGUSTÍ",
+    "conductor_name": "ESTELA BELMONTE AGUSTÍ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T2 Plus",
+      "year": 2024,
+      "plate": "B53694"
+    },
+    "incident": {
+      "date": "2026-02-06",
+      "time": "11:30",
+      "location": "Av. España, Santo Domingo Este",
+      "acta_number": "Q-234001-26",
+      "description": "Asegurado con Jetour T2 Plus placa B53694 causó daños materiales a tercero en Av. España, Santo Domingo Este."
+    },
+    "financials": {
+      "amount_requested": 1113300.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 1000000
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 7,
+      "proposal_rejected_before": false,
+      "days_since_incident": 106
+    },
+    "channel": "email",
+    "taller": "Auto Pro Santo Domingo",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.82,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0065",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-57425",
+    "client_name": "MARÍA ÁNGELES CABO BELTRÁN",
+    "conductor_name": "MARÍA ÁNGELES CABO BELTRÁN",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5",
+      "year": 2016,
+      "plate": "G76648"
+    },
+    "incident": {
+      "date": "2026-01-05",
+      "time": "11:30",
+      "location": "Av. Independencia, Santo Domingo",
+      "acta_number": "Q-237414-26",
+      "description": "Tercero afectado por accidente causado por Mazda CX-5 (G76648) en Av. Independencia, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 421200.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 421200.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "cedula",
+        "fotos_danos",
+        "licencia_conducir"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 8,
+      "proposal_rejected_before": false,
+      "days_since_incident": 138
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0066",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-57749",
+    "client_name": "CLOTILDE DEL CAZORLA",
+    "conductor_name": "CLOTILDE DEL CAZORLA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Kia",
+      "model": "Sportage",
+      "year": 2022,
+      "plate": "PP63852"
+    },
+    "incident": {
+      "date": "2026-03-02",
+      "time": "14:30",
+      "location": "Carretera Duarte, Santiago",
+      "acta_number": "Q-811256-26",
+      "description": "Impacto en parte trasera del Kia Sportage placa PP63852 en Carretera Duarte, Santiago."
+    },
+    "financials": {
+      "amount_requested": 468500.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 463500.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 82
+    },
+    "channel": "presencial",
+    "taller": "TechCar Santiago",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0067",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-36174",
+    "client_name": "VERA BAYONA HIDALGO",
+    "conductor_name": "VERA BAYONA HIDALGO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Chevrolet",
+      "model": "Trax",
+      "year": 2023,
+      "plate": "G31241"
+    },
+    "incident": {
+      "date": "2026-02-05",
+      "time": "08:00",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-900185-26",
+      "description": "Reclamación RC por accidente en Av. 27 de Febrero, Santo Domingo con Chevrolet Trax placa G31241."
+    },
+    "financials": {
+      "amount_requested": 1421400.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 1421400.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 9,
+      "proposal_rejected_before": false,
+      "days_since_incident": 107
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0068",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-69130",
+    "client_name": "ELODIA CRUZ RÍOS",
+    "conductor_name": "ELODIA CRUZ RÍOS",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Elantra",
+      "year": 2021,
+      "plate": "A39102"
+    },
+    "incident": {
+      "date": "2026-03-31",
+      "time": "00:45",
+      "location": "Av. España, Santo Domingo Este",
+      "acta_number": "Q-849421-26",
+      "description": "Asegurado con Hyundai Elantra placa A39102 causó daños materiales a tercero en Av. España, Santo Domingo Este."
+    },
+    "financials": {
+      "amount_requested": 75400.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 75400.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 53
+    },
+    "channel": "email",
+    "taller": "Talleres Moca Express",
+    "compliance": {
+      "fraud_score": 0.15,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0069",
+    "claim_type": "robatori",
+    "policy_number": "SP-PCS-009-71487",
+    "client_name": "OFELIA DEL ÁNGEL",
+    "conductor_name": "OFELIA DEL ÁNGEL",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Yaris",
+      "year": 2019,
+      "plate": "H28191"
+    },
+    "incident": {
+      "date": "2026-04-25",
+      "time": "19:00",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-913875-26",
+      "description": "Sustracción del Toyota Yaris (H28191). Denuncia ante Policía Nacional."
+    },
+    "financials": {
+      "amount_requested": 788500.0,
+      "max_coverage": 800000,
+      "deductible": 10000,
+      "covered": true,
+      "net_payable": 778500.0
+    },
+    "documents": {
+      "required": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "submitted": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 28
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0070",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-24530",
+    "client_name": "NAZARIO MARÍ CALLEJA",
+    "conductor_name": "NAZARIO MARÍ CALLEJA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Jetour",
+      "model": "T1 Lux",
+      "year": 2021,
+      "plate": "H18232"
+    },
+    "incident": {
+      "date": "2026-05-08",
+      "time": "19:00",
+      "location": "Carretera Mella, Santo Domingo Este",
+      "acta_number": "Q-800674-26",
+      "description": "Colisión frontal del Jetour T1 Lux placa H18232 en Carretera Mella, Santo Domingo Este."
+    },
+    "financials": {
+      "amount_requested": 394800.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 389800.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 15
+    },
+    "channel": "email",
+    "taller": "Centro Automotriz del Este",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0071",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-71621",
+    "client_name": "ELIGIO CARLOS CAMPO",
+    "conductor_name": "ELIGIO CARLOS CAMPO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5",
+      "year": 2023,
+      "plate": "PP61177"
+    },
+    "incident": {
+      "date": "2026-01-12",
+      "time": "20:45",
+      "location": "Av. Rómulo Betancourt, Santo Domingo",
+      "acta_number": "Q-710169-26",
+      "description": "Choque contra poste de alumbrado en Av. Rómulo Betancourt, Santo Domingo. Mazda CX-5 placa PP61177."
+    },
+    "financials": {
+      "amount_requested": 608400.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 495000
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 1,
+      "proposal_rejected_before": false,
+      "days_since_incident": 131
+    },
+    "channel": "email",
+    "taller": "Talleres Moca Express",
+    "compliance": {
+      "fraud_score": 0.2,
+      "confidence": 0.82,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0072",
+    "claim_type": "danys_mecanics",
+    "policy_number": "SP-PCS-009-92802",
+    "client_name": "CALIXTA DEL LUJÁN",
+    "conductor_name": "CALIXTA DEL LUJÁN",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Nissan",
+      "model": "Sentra",
+      "year": 2017,
+      "plate": "H72722"
+    },
+    "incident": {
+      "date": "2026-02-16",
+      "time": "04:00",
+      "location": "Av. Abraham Lincoln, Santo Domingo",
+      "acta_number": null,
+      "description": "Daño por desgaste en transmisión del Nissan Sentra (H72722). No derivado de accidente."
+    },
+    "financials": {
+      "amount_requested": 58700.0,
+      "max_coverage": 0,
+      "deductible": 0,
+      "covered": false,
+      "net_payable": 0.0
+    },
+    "documents": {
+      "required": [],
+      "submitted": [],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 3,
+      "interaction_count": 1,
+      "proposal_rejected_before": false,
+      "days_since_incident": 96
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.4,
+      "confidence": 0.99,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "reject",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0073",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-35048",
+    "client_name": "CLEMENTINA PACA NOVOA FRUTOS",
+    "conductor_name": "JOSÉ ANTONIO TORRES-IGLESIAS",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Polo",
+      "year": 2019,
+      "plate": "PP94790"
+    },
+    "incident": {
+      "date": "2026-03-15",
+      "time": "11:00",
+      "location": "Carretera Duarte, Santiago",
+      "acta_number": "Q-295892-26",
+      "description": "Colisión en Carretera Duarte, Santiago: Volkswagen Polo (PP94790) impactó vehículo estacionado."
+    },
+    "financials": {
+      "amount_requested": 997700.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 997700.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 2,
+      "proposal_rejected_before": false,
+      "days_since_incident": 69
+    },
+    "channel": "phone",
+    "taller": "Taller Hernández e Hijos",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0074",
+    "claim_type": "robatori",
+    "policy_number": "SP-PCS-009-20345",
+    "client_name": "ARTURO RODA LLORET",
+    "conductor_name": "ARTURO RODA LLORET",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5",
+      "year": 2019,
+      "plate": "A65640"
+    },
+    "incident": {
+      "date": "2026-04-21",
+      "time": "19:15",
+      "location": "Av. John F. Kennedy, Santo Domingo",
+      "acta_number": "Q-823270-26",
+      "description": "Sustracción del Mazda CX-5 (A65640). Denuncia ante Policía Nacional."
+    },
+    "financials": {
+      "amount_requested": 514600.0,
+      "max_coverage": 800000,
+      "deductible": 10000,
+      "covered": true,
+      "net_payable": 504600.0
+    },
+    "documents": {
+      "required": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "submitted": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 2,
+      "proposal_rejected_before": false,
+      "days_since_incident": 32
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0075",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-93816",
+    "client_name": "ABEL MÚGICA CASTRILLO",
+    "conductor_name": "FICTICIO SOTO GUERRERO CAMILO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Honda",
+      "model": "CR-V",
+      "year": 2024,
+      "plate": "G45986"
+    },
+    "incident": {
+      "date": "2026-01-15",
+      "time": "02:45",
+      "location": "Av. John F. Kennedy, Santo Domingo",
+      "acta_number": "Q-170499-26",
+      "description": "El Honda CR-V placa G45986 causó daños a propiedad de tercero en Av. John F. Kennedy, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 427400.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 427400.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 128
+    },
+    "channel": "phone",
+    "taller": "Auto Center Pepín",
+    "compliance": {
+      "fraud_score": 0.25,
+      "confidence": 0.85,
+      "ofac_flagged": true,
+      "due_diligence": "ampliada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0076",
+    "claim_type": "robatori",
+    "policy_number": "SP-PCS-009-30111",
+    "client_name": "CECILIO SALA-ROMA",
+    "conductor_name": "CECILIO SALA-ROMA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Chevrolet",
+      "model": "Trax",
+      "year": 2024,
+      "plate": "PP89310"
+    },
+    "incident": {
+      "date": "2026-04-26",
+      "time": "11:30",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-127172-26",
+      "description": "Hurto parcial de piezas del Chevrolet Trax placa PP89310 estacionado en Av. 27 de Febrero, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 437400.0,
+      "max_coverage": 800000,
+      "deductible": 10000,
+      "covered": true,
+      "net_payable": 427400.0
+    },
+    "documents": {
+      "required": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "submitted": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 27
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0077",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-38124",
+    "client_name": "ADELIA DE BENET",
+    "conductor_name": "ADELIA DE BENET",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Tucson",
+      "year": 2019,
+      "plate": "D68493"
+    },
+    "incident": {
+      "date": "2026-03-15",
+      "time": "22:45",
+      "location": "Av. España, Santo Domingo Este",
+      "acta_number": "Q-265156-26",
+      "description": "Vuelco del Hyundai Tucson (D68493) al perder el control en Av. España, Santo Domingo Este."
+    },
+    "financials": {
+      "amount_requested": 130500.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 125500.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "licencia_conducir",
+        "fotos_danos",
+        "cedula"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 2,
+      "proposal_rejected_before": false,
+      "days_since_incident": 69
+    },
+    "channel": "email",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0078",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-74752",
+    "client_name": "LEANDRO ARAUJO PEIRÓ",
+    "conductor_name": "LEANDRO ARAUJO PEIRÓ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Tucson",
+      "year": 2018,
+      "plate": "B41029"
+    },
+    "incident": {
+      "date": "2026-01-07",
+      "time": "11:30",
+      "location": "Av. San Martín, Santo Domingo",
+      "acta_number": "Q-601916-26",
+      "description": "Tercero afectado por accidente causado por Hyundai Tucson (B41029) en Av. San Martín, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 1044300.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 1044300.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 4,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 136
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.25,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0079",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-19720",
+    "client_name": "MAMEN COLOMER-ROPERO",
+    "conductor_name": "MAMEN COLOMER-ROPERO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Hilux",
+      "year": 2017,
+      "plate": "E94192"
+    },
+    "incident": {
+      "date": "2026-04-26",
+      "time": "14:30",
+      "location": "Malecón, Santo Domingo",
+      "acta_number": "Q-158104-26",
+      "description": "Reclamación RC por accidente en Malecón, Santo Domingo con Toyota Hilux placa E94192."
+    },
+    "financials": {
+      "amount_requested": 308500.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 308500.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 9,
+      "proposal_rejected_before": false,
+      "days_since_incident": 27
+    },
+    "channel": "presencial",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0080",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-78012",
+    "client_name": "ALFONSO MENDEZ PASTOR",
+    "conductor_name": "ALFONSO MENDEZ PASTOR",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Kia",
+      "model": "Sportage",
+      "year": 2020,
+      "plate": "C55353"
+    },
+    "incident": {
+      "date": "2026-03-14",
+      "time": "02:30",
+      "location": "Av. John F. Kennedy, Santo Domingo",
+      "acta_number": "Q-720556-26",
+      "description": "Reclamación RC por accidente en Av. John F. Kennedy, Santo Domingo con Kia Sportage placa C55353."
+    },
+    "financials": {
+      "amount_requested": 456000.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 456000.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 3,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 70
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.4,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0081",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-20646",
+    "client_name": "VINICIO PALLARÈS GALLO",
+    "conductor_name": "VINICIO PALLARÈS GALLO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Nissan",
+      "model": "Sentra",
+      "year": 2024,
+      "plate": "PP13718"
+    },
+    "incident": {
+      "date": "2026-01-12",
+      "time": "20:30",
+      "location": "Autopista Duarte, km 15",
+      "acta_number": "Q-356773-26",
+      "description": "Asegurado con Nissan Sentra placa PP13718 causó daños materiales a tercero en Autopista Duarte, km 15."
+    },
+    "financials": {
+      "amount_requested": 754000.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 754000.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 7,
+      "proposal_rejected_before": false,
+      "days_since_incident": 131
+    },
+    "channel": "presencial",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0082",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-73471",
+    "client_name": "NAZARIO DE OTERO",
+    "conductor_name": "NAZARIO DE OTERO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Yaris",
+      "year": 2017,
+      "plate": "H64476"
+    },
+    "incident": {
+      "date": "2026-04-29",
+      "time": "06:30",
+      "location": "Av. Máximo Gómez, Santo Domingo",
+      "acta_number": "Q-247720-26",
+      "description": "Colisión frontal del Toyota Yaris placa H64476 en Av. Máximo Gómez, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 379300.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 374300.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "acta_policial",
+        "licencia_conducir",
+        "formulario_aviso_accidente",
+        "cotizacion_taller"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 6,
+      "proposal_rejected_before": false,
+      "days_since_incident": 24
+    },
+    "channel": "email",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0083",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-85718",
+    "client_name": "VERÓNICA DEL CORTES",
+    "conductor_name": "VERÓNICA DEL CORTES",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Explorer",
+      "year": 2018,
+      "plate": "B52917"
+    },
+    "incident": {
+      "date": "2026-03-22",
+      "time": "06:15",
+      "location": "Av. Máximo Gómez, Santo Domingo",
+      "acta_number": "Q-325595-26",
+      "description": "Choque contra poste de alumbrado en Av. Máximo Gómez, Santo Domingo. Ford Explorer placa B52917."
+    },
+    "financials": {
+      "amount_requested": 312900.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 307900.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 8,
+      "proposal_rejected_before": false,
+      "days_since_incident": 62
+    },
+    "channel": "email",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0084",
+    "claim_type": "robatori",
+    "policy_number": "SP-PCS-009-66482",
+    "client_name": "TONI DE ELORZA",
+    "conductor_name": "TONI DE ELORZA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Polo",
+      "year": 2019,
+      "plate": "PP24089"
+    },
+    "incident": {
+      "date": "2026-02-04",
+      "time": "08:30",
+      "location": "Av. Las Carreras, Santiago",
+      "acta_number": "Q-628750-26",
+      "description": "Sustracción del Volkswagen Polo (PP24089). Denuncia ante Policía Nacional."
+    },
+    "financials": {
+      "amount_requested": 680500.0,
+      "max_coverage": 800000,
+      "deductible": 10000,
+      "covered": true,
+      "net_payable": 670500.0
+    },
+    "documents": {
+      "required": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "submitted": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 7,
+      "proposal_rejected_before": true,
+      "days_since_incident": 108
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0085",
+    "claim_type": "danys_mecanics",
+    "policy_number": "SP-PCS-009-58915",
+    "client_name": "AITANA ESCOBAR MÁRQUEZ",
+    "conductor_name": "AITANA ESCOBAR MÁRQUEZ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Tucson",
+      "year": 2017,
+      "plate": "A61629"
+    },
+    "incident": {
+      "date": "2026-03-28",
+      "time": "17:30",
+      "location": "Av. San Martín, Santo Domingo",
+      "acta_number": null,
+      "description": "Daño por desgaste en transmisión del Hyundai Tucson (A61629). No derivado de accidente."
+    },
+    "financials": {
+      "amount_requested": 61600.0,
+      "max_coverage": 0,
+      "deductible": 0,
+      "covered": false,
+      "net_payable": 0.0
+    },
+    "documents": {
+      "required": [],
+      "submitted": [],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 9,
+      "proposal_rejected_before": false,
+      "days_since_incident": 56
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.99,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "reject",
+      "hitl_required": false,
+      "judicializado": true
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0086",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-90356",
+    "client_name": "ROSARIO HURTADO LASA",
+    "conductor_name": "ROSARIO HURTADO LASA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Elantra",
+      "year": 2024,
+      "plate": "B52987"
+    },
+    "incident": {
+      "date": "2026-03-23",
+      "time": "05:45",
+      "location": "Autopista Duarte, km 15",
+      "acta_number": "Q-955374-26",
+      "description": "Colisión frontal del Hyundai Elantra placa B52987 en Autopista Duarte, km 15."
+    },
+    "financials": {
+      "amount_requested": 614300.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 495000
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 61
+    },
+    "channel": "phone",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.2,
+      "confidence": 0.82,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0087",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-13492",
+    "client_name": "RUFINO CAMPOY PIÑEIRO",
+    "conductor_name": "RUFINO CAMPOY PIÑEIRO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Explorer",
+      "year": 2024,
+      "plate": "D92478"
+    },
+    "incident": {
+      "date": "2026-05-02",
+      "time": "08:15",
+      "location": "Av. Abraham Lincoln, Santo Domingo",
+      "acta_number": "Q-700383-26",
+      "description": "Asegurado con Ford Explorer placa D92478 causó daños materiales a tercero en Av. Abraham Lincoln, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 833800.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 833800.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 21
+    },
+    "channel": "presencial",
+    "taller": "TechCar Santiago",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0088",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-63788",
+    "client_name": "TIMOTEO SOSA GIRÓN",
+    "conductor_name": "FICTICIO GUERRERO SALINAS EDGAR",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Ford",
+      "model": "Explorer",
+      "year": 2017,
+      "plate": "G36724"
+    },
+    "incident": {
+      "date": "2026-05-09",
+      "time": "19:45",
+      "location": "Autopista Duarte, km 15",
+      "acta_number": "Q-651002-26",
+      "description": "Tercero afectado por accidente causado por Ford Explorer (G36724) en Autopista Duarte, km 15."
+    },
+    "financials": {
+      "amount_requested": 1924000.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 1924000.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 1,
+      "proposal_rejected_before": false,
+      "days_since_incident": 14
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": true,
+      "due_diligence": "ampliada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0089",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-99226",
+    "client_name": "SEBASTIAN SEGUÍ",
+    "conductor_name": "SEBASTIAN SEGUÍ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Nissan",
+      "model": "Sentra",
+      "year": 2023,
+      "plate": "E98587"
+    },
+    "incident": {
+      "date": "2026-03-09",
+      "time": "19:45",
+      "location": "Av. Winston Churchill, Santo Domingo",
+      "acta_number": "Q-227794-26",
+      "description": "Impacto en parte trasera del Nissan Sentra placa E98587 en Av. Winston Churchill, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 125700.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 120700.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "licencia_conducir",
+        "acta_policial",
+        "cedula",
+        "fotos_danos"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 9,
+      "proposal_rejected_before": false,
+      "days_since_incident": 75
+    },
+    "channel": "phone",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0090",
+    "claim_type": "DPA",
+    "policy_number": "SP-PCS-009-47700",
+    "client_name": "ENCARNACIÓN GOÑI GISBERT",
+    "conductor_name": "NARCISO FERRANDO PUJADAS",
+    "conductor_is_owner": false,
+    "vehicle": {
+      "brand": "Honda",
+      "model": "CR-V",
+      "year": 2017,
+      "plate": "D15513"
+    },
+    "incident": {
+      "date": "2026-01-21",
+      "time": "11:45",
+      "location": "Av. 27 de Febrero, Santo Domingo",
+      "acta_number": "Q-745584-26",
+      "description": "Asegurado con Honda CR-V placa D15513 causó daños materiales a tercero en Av. 27 de Febrero, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 759500.0,
+      "max_coverage": 1000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 759500.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial_certificada",
+        "acta_conciliacion",
+        "presupuesto_piezas",
+        "fotos_danos_con_placa",
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 122
+    },
+    "channel": "presencial",
+    "taller": "Centro Automotriz del Este",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0091",
+    "claim_type": "robatori",
+    "policy_number": "SP-PCS-009-23133",
+    "client_name": "ELIGIA BAÑOS LORENZO",
+    "conductor_name": "ELIGIA BAÑOS LORENZO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5",
+      "year": 2018,
+      "plate": "C16880"
+    },
+    "incident": {
+      "date": "2026-04-16",
+      "time": "10:45",
+      "location": "Av. Winston Churchill, Santo Domingo",
+      "acta_number": "Q-436768-26",
+      "description": "Sustracción del Mazda CX-5 (C16880). Denuncia ante Policía Nacional."
+    },
+    "financials": {
+      "amount_requested": 176400.0,
+      "max_coverage": 800000,
+      "deductible": 10000,
+      "covered": true,
+      "net_payable": 166400.0
+    },
+    "documents": {
+      "required": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "submitted": [
+        "matricula",
+        "cedula",
+        "licencia_conducir"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 1,
+      "proposal_rejected_before": false,
+      "days_since_incident": 37
+    },
+    "channel": "phone",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0092",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-14888",
+    "client_name": "MIGUELA VERGARA PULIDO",
+    "conductor_name": "MIGUELA VERGARA PULIDO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Hilux",
+      "year": 2024,
+      "plate": "C80143"
+    },
+    "incident": {
+      "date": "2026-02-14",
+      "time": "13:15",
+      "location": "Malecón, Santo Domingo",
+      "acta_number": "Q-139286-26",
+      "description": "Colisión frontal del Toyota Hilux placa C80143 en Malecón, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 579600.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 495000
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 7,
+      "proposal_rejected_before": false,
+      "days_since_incident": 98
+    },
+    "channel": "phone",
+    "taller": "Grupo Automotriz RD",
+    "compliance": {
+      "fraud_score": 0.2,
+      "confidence": 0.82,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0093",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-81211",
+    "client_name": "EUSEBIA DE CARLOS",
+    "conductor_name": "EUSEBIA DE CARLOS",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Nissan",
+      "model": "Sentra",
+      "year": 2019,
+      "plate": "H94058"
+    },
+    "incident": {
+      "date": "2026-05-15",
+      "time": "15:15",
+      "location": "Av. Abraham Lincoln, Santo Domingo",
+      "acta_number": "Q-872399-26",
+      "description": "Choque contra poste de alumbrado en Av. Abraham Lincoln, Santo Domingo. Nissan Sentra placa H94058."
+    },
+    "financials": {
+      "amount_requested": 528800.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 495000
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 8
+    },
+    "channel": "phone",
+    "taller": "Centro Automotriz del Este",
+    "compliance": {
+      "fraud_score": 0.2,
+      "confidence": 0.82,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0094",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-77538",
+    "client_name": "CHUY LARA-ARENAS",
+    "conductor_name": "CHUY LARA-ARENAS",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Kia",
+      "model": "Cerato",
+      "year": 2017,
+      "plate": "G66059"
+    },
+    "incident": {
+      "date": "2026-03-25",
+      "time": "02:45",
+      "location": "Av. Winston Churchill, Santo Domingo",
+      "acta_number": "Q-785436-26",
+      "description": "Choque contra poste de alumbrado en Av. Winston Churchill, Santo Domingo. Kia Cerato placa G66059."
+    },
+    "financials": {
+      "amount_requested": 417600.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 412600.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "licencia_conducir",
+        "cedula",
+        "acta_policial",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 3,
+      "proposal_rejected_before": false,
+      "days_since_incident": 59
+    },
+    "channel": "presencial",
+    "taller": "Auto Center Pepín",
+    "compliance": {
+      "fraud_score": 0.25,
+      "confidence": 0.62,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "request_info",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0095",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-63138",
+    "client_name": "MARC ROVIRA OJEDA",
+    "conductor_name": "MARC ROVIRA OJEDA",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Hyundai",
+      "model": "Tucson",
+      "year": 2022,
+      "plate": "D30934"
+    },
+    "incident": {
+      "date": "2026-05-09",
+      "time": "22:30",
+      "location": "Av. San Martín, Santo Domingo",
+      "acta_number": "Q-735163-26",
+      "description": "Choque contra poste de alumbrado en Av. San Martín, Santo Domingo. Hyundai Tucson placa D30934."
+    },
+    "financials": {
+      "amount_requested": 430500.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 425500.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 1,
+      "interaction_count": 5,
+      "proposal_rejected_before": false,
+      "days_since_incident": 14
+    },
+    "channel": "presencial",
+    "taller": "Repuestos y Servicio Continental",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0096",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-99173",
+    "client_name": "ISA VIDAL CARLOS",
+    "conductor_name": "ISA VIDAL CARLOS",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Polo",
+      "year": 2023,
+      "plate": "C42435"
+    },
+    "incident": {
+      "date": "2026-01-21",
+      "time": "16:45",
+      "location": "Av. John F. Kennedy, Santo Domingo",
+      "acta_number": "Q-444056-26",
+      "description": "Impacto en parte trasera del Volkswagen Polo placa C42435 en Av. John F. Kennedy, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 331200.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 326200.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 2,
+      "proposal_rejected_before": true,
+      "days_since_incident": 122
+    },
+    "channel": "phone",
+    "taller": "Centro Automotriz del Este",
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0097",
+    "claim_type": "robatori",
+    "policy_number": "SP-PCS-009-69432",
+    "client_name": "XIMENA FALCÓN IÑIGUEZ",
+    "conductor_name": "XIMENA FALCÓN IÑIGUEZ",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Volkswagen",
+      "model": "Polo",
+      "year": 2016,
+      "plate": "H17292"
+    },
+    "incident": {
+      "date": "2026-02-03",
+      "time": "16:45",
+      "location": "Av. Abraham Lincoln, Santo Domingo",
+      "acta_number": "Q-882032-26",
+      "description": "Robo total del Volkswagen Polo placa H17292 reportado en Av. Abraham Lincoln, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 447200.0,
+      "max_coverage": 800000,
+      "deductible": 10000,
+      "covered": true,
+      "net_payable": 437200.0
+    },
+    "documents": {
+      "required": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "submitted": [
+        "denuncia_policial",
+        "licencia_conducir",
+        "cedula",
+        "matricula"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 8,
+      "proposal_rejected_before": false,
+      "days_since_incident": 109
+    },
+    "channel": "email",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0098",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-71875",
+    "client_name": "PAULINO RUBIO ABELLÁN",
+    "conductor_name": "FICTICIO GUZMAN TORRES MARCO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Hilux",
+      "year": 2023,
+      "plate": "PP19046"
+    },
+    "incident": {
+      "date": "2026-01-09",
+      "time": "09:45",
+      "location": "Carretera Mella, Santo Domingo Este",
+      "acta_number": "Q-464663-26",
+      "description": "Colisión frontal del Toyota Hilux placa PP19046 en Carretera Mella, Santo Domingo Este."
+    },
+    "financials": {
+      "amount_requested": 118100.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 113100.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "cedula",
+        "cotizacion_taller",
+        "formulario_aviso_accidente",
+        "licencia_conducir"
+      ],
+      "complete": false
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 7,
+      "proposal_rejected_before": false,
+      "days_since_incident": 134
+    },
+    "channel": "presencial",
+    "taller": "Centro Automotriz del Este",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.62,
+      "ofac_flagged": true,
+      "due_diligence": "ampliada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0099",
+    "claim_type": "danys_propis",
+    "policy_number": "SP-PCS-009-12979",
+    "client_name": "ÁNGELA FIGUERAS",
+    "conductor_name": "ÁNGELA FIGUERAS",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Mazda",
+      "model": "CX-5",
+      "year": 2017,
+      "plate": "C10455"
+    },
+    "incident": {
+      "date": "2026-03-18",
+      "time": "14:45",
+      "location": "Av. Abraham Lincoln, Santo Domingo",
+      "acta_number": "Q-948799-26",
+      "description": "Impacto en parte trasera del Mazda CX-5 placa C10455 en Av. Abraham Lincoln, Santo Domingo."
+    },
+    "financials": {
+      "amount_requested": 333500.0,
+      "max_coverage": 500000,
+      "deductible": 5000,
+      "covered": true,
+      "net_payable": 328500.0
+    },
+    "documents": {
+      "required": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "submitted": [
+        "formulario_aviso_accidente",
+        "acta_policial",
+        "licencia_conducir",
+        "cedula",
+        "fotos_danos",
+        "cotizacion_taller"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 2,
+      "interaction_count": 4,
+      "proposal_rejected_before": false,
+      "days_since_incident": 66
+    },
+    "channel": "email",
+    "taller": "Talleres Moca Express",
+    "compliance": {
+      "fraud_score": 0.1,
+      "confidence": 0.85,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "approve",
+      "hitl_required": false,
+      "judicializado": false
+    }
+  },
+  {
+    "claim_id": "EXP-2026-0100",
+    "claim_type": "RC",
+    "policy_number": "SP-PCS-009-23224",
+    "client_name": "IRENE BECERRA MURILLO",
+    "conductor_name": "IRENE BECERRA MURILLO",
+    "conductor_is_owner": true,
+    "vehicle": {
+      "brand": "Toyota",
+      "model": "Corolla",
+      "year": 2018,
+      "plate": "C18819"
+    },
+    "incident": {
+      "date": "2026-01-09",
+      "time": "14:00",
+      "location": "Carretera Sánchez, Baní",
+      "acta_number": "Q-403314-26",
+      "description": "Reclamación RC por accidente en Carretera Sánchez, Baní con Toyota Corolla placa C18819."
+    },
+    "financials": {
+      "amount_requested": 561100.0,
+      "max_coverage": 2000000,
+      "deductible": 0,
+      "covered": true,
+      "net_payable": 561100.0
+    },
+    "documents": {
+      "required": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "submitted": [
+        "aviso_siniestro",
+        "acta_policial",
+        "cedula",
+        "licencia_conducir",
+        "fotos_danos"
+      ],
+      "complete": true
+    },
+    "history": {
+      "prior_claims_count": 0,
+      "interaction_count": 8,
+      "proposal_rejected_before": false,
+      "days_since_incident": 134
+    },
+    "channel": "presencial",
+    "taller": null,
+    "compliance": {
+      "fraud_score": 0.0,
+      "confidence": 0.9,
+      "ofac_flagged": false,
+      "due_diligence": "simplificada"
+    },
+    "ground_truth": {
+      "decision": "hitl",
+      "hitl_required": true,
+      "judicializado": true
+    }
+  }
+]

@@ -1,1 +1,765 @@
-import streamlit as st; st.titgle('Smart-Claims Agent')
+"""
+Smart-Claims Agent — Streamlit Dashboard
+Seguros Pepín S.A. · PoC Académico (TFM)
+
+Funciona en local Y en Streamlit Cloud:
+  - Llama a los agentes directamente (sin FastAPI ni Docker)
+  - ChromaDB en modo embedded (PersistentClient)
+  - Pólizas ingestadas al arrancar si la colección está vacía
+
+Configuración:
+  Local:  $env:ANTHROPIC_API_KEY = "sk-ant-..."
+          streamlit run frontend/app.py
+  Cloud:  añadir ANTHROPIC_API_KEY en Streamlit Secrets
+"""
+from __future__ import annotations
+
+import asyncio
+import os
+import sys
+import uuid
+from datetime import date, timedelta
+from pathlib import Path
+
+# ── Path setup ─────────────────────────────────────────────────────────────────
+_REPO = Path(__file__).parent.parent
+sys.path.insert(0, str(_REPO / "backend"))
+os.environ.setdefault("DATA_DIR", str(_REPO / "data"))
+
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+import streamlit as st
+
+# ── Streamlit Cloud secrets ────────────────────────────────────────────────────
+if hasattr(st, "secrets") and "ANTHROPIC_API_KEY" in st.secrets:
+    os.environ["ANTHROPIC_API_KEY"] = st.secrets["ANTHROPIC_API_KEY"]
+
+HAS_KEY = bool(os.getenv("ANTHROPIC_API_KEY", ""))
+BRAND_COLOR = "#003087"
+
+
+# ── Async helper ───────────────────────────────────────────────────────────────
+def _run(coro):
+    """Run async coroutine from sync Streamlit context."""
+    try:
+        return asyncio.run(coro)
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        try:
+            return loop.run_until_complete(coro)
+        finally:
+            loop.close()
+
+
+# ── ChromaDB init (cached across reruns) ──────────────────────────────────────
+@st.cache_resource(show_spinner="Iniciando base de conocimiento...")
+def _init_rag() -> dict:
+    """Ingest policies into embedded ChromaDB if collection is empty."""
+    try:
+        from app.rag.retriever import get_coverage_retriever, reset_retriever_cache
+        from app.rag.ingestion import ingest_policies
+
+        reset_retriever_cache()
+        retriever = _run(get_coverage_retriever())
+        if retriever is None:
+            return {"status": "unavailable", "docs": 0}
+
+        count = retriever._col.count()
+        if count == 0:
+            ingested = _run(ingest_policies())
+            reset_retriever_cache()
+            return {"status": "ingested", "docs": ingested}
+
+        return {"status": "ready", "docs": count}
+    except Exception as e:
+        return {"status": "error", "error": str(e), "docs": 0}
+
+
+# ── Page config ────────────────────────────────────────────────────────────────
+st.set_page_config(
+    page_title="Smart-Claims Agent",
+    page_icon="🛡️",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+rag_state = _init_rag()
+
+# ── Sidebar ────────────────────────────────────────────────────────────────────
+with st.sidebar:
+    st.image(
+        "https://placehold.co/220x60/003087/white?text=Seguros+Pepín",
+        use_container_width=True,
+    )
+    st.title("Smart-Claims Agent")
+    st.caption("Sistema agéntico de gestión de reclamaciones · PoC TFM")
+    st.divider()
+
+    page = st.radio(
+        "Navegación",
+        ["Nueva Reclamación", "Gestión Pólizas", "Cola HITL", "Dashboard KPIs", "Consulta Agente H"],
+        label_visibility="collapsed",
+    )
+
+    st.divider()
+
+    # Status panel
+    key_ok = HAS_KEY
+    rag_ok = rag_state["status"] in ("ready", "ingested")
+
+    st.caption("Estado del sistema")
+    st.markdown(
+        f"{'🟢' if key_ok else '🔴'} **Claude API** — {'configurada' if key_ok else 'no configurada'}"
+    )
+    st.markdown(
+        f"{'🟢' if rag_ok else '🟡'} **ChromaDB** — "
+        f"{'`' + str(rag_state['docs']) + '` chunks' if rag_ok else rag_state.get('error', 'sin pólizas')}"
+    )
+
+    if not key_ok:
+        st.warning("Sin API key los agentes C/D/E usarán fallbacks.")
+
+    st.divider()
+    st.caption("Seguros Pepín S.A. · Versión académica · 2026")
+
+
+# ── Helpers ────────────────────────────────────────────────────────────────────
+CLAIM_TYPES = {
+    "danys_propis":   "Daños Propios (§2.1)",
+    "DPA":            "Daños a Propiedad Ajena (§2.2)",
+    "RC":             "Responsabilidad Civil (§2.3)",
+    "robatori":       "Robo Total/Parcial (§2.4)",
+    "danys_mecanics": "Daños Mecánicos (§2.5 — No cubierto)",
+}
+
+REQUIRED_DOCS = {
+    "danys_propis":   ["formulario_aviso_accidente", "acta_policial",
+                       "licencia_conducir", "cedula", "fotos_danos", "cotizacion_taller"],
+    "DPA":            ["aviso_siniestro", "acta_policial_certificada", "acta_conciliacion",
+                       "presupuesto_piezas", "fotos_danos_con_placa", "matricula",
+                       "cedula", "licencia_conducir"],
+    "RC":             ["aviso_siniestro", "acta_policial", "cedula", "licencia_conducir", "fotos_danos"],
+    "robatori":       ["denuncia_policial", "licencia_conducir", "cedula", "matricula"],
+    "danys_mecanics": [],
+}
+
+DOC_LABELS = {
+    "formulario_aviso_accidente": "Formulario aviso accidente (PEPIN-FRM-LR-0003)",
+    "acta_policial": "Acta policial DIGESETT",
+    "acta_policial_certificada": "Acta policial certificada",
+    "licencia_conducir": "Licencia de conducir",
+    "cedula": "Cédula de identidad",
+    "fotos_danos": "Fotos del vehículo dañado",
+    "cotizacion_taller": "Cotización de taller autorizado",
+    "aviso_siniestro": "Aviso de siniestro",
+    "acta_conciliacion": "Acta de conciliación (original)",
+    "presupuesto_piezas": "Presupuesto piezas y mano de obra",
+    "fotos_danos_con_placa": "Fotos con placa visible",
+    "matricula": "Matrícula del vehículo",
+    "denuncia_policial": "Denuncia policial (original)",
+}
+
+COVERAGE = {
+    "danys_propis":   {"max": 500_000,   "deductible": 5_000},
+    "DPA":            {"max": 1_000_000, "deductible": 0},
+    "RC":             {"max": 2_000_000, "deductible": 0},
+    "robatori":       {"max": 800_000,   "deductible": 10_000},
+    "danys_mecanics": {"max": 0,         "deductible": 0},
+}
+
+STATUS_COLORS = {
+    "approve":        "#28a745",
+    "reject":         "#dc3545",
+    "request_info":   "#ffc107",
+    "hitl":           "#6f42c1",
+    "RESOLVED":       "#28a745",
+    "REJECTED":       "#dc3545",
+    "VALIDATING":     "#ffc107",
+    "PENDING_REVIEW": "#6f42c1",
+}
+
+
+def _fmt_rd(n: float) -> str:
+    return f"RD$ {n:,.0f}"
+
+
+def _badge(text: str, color: str) -> str:
+    return (
+        f'<span style="background:{color};color:white;padding:3px 12px;'
+        f'border-radius:12px;font-size:0.9em;font-weight:bold">{text}</span>'
+    )
+
+
+def _build_state(claim_id, extracted_data):
+    return {
+        "claim_id": claim_id,
+        "messages": [{"role": "user", "content": f"Procesar reclamación {claim_id}"}],
+        "status": "VALIDATING",
+        "extracted_data": extracted_data,
+        "policy_check": None,
+        "decision": None,
+        "hitl_required": False,
+    }
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# PAGE 1 — Nueva Reclamación (agentes reales)
+# ══════════════════════════════════════════════════════════════════════════════
+if page == "Nueva Reclamación":
+    st.title("Nueva Reclamación")
+    st.caption("El formulario invoca los 8 agentes en tiempo real — sin mock")
+
+    with st.form("claim_form"):
+        col1, col2 = st.columns(2)
+
+        with col1:
+            claim_type = st.selectbox(
+                "Tipo de reclamación",
+                options=list(CLAIM_TYPES.keys()),
+                format_func=lambda k: CLAIM_TYPES[k],
+            )
+            client_name = st.text_input(
+                "Nombre del asegurado (apellidos primero)",
+                placeholder="RODRIGUEZ PEREZ JUAN",
+            )
+            conductor_name = st.text_input(
+                "Conductor (si difiere del asegurado)",
+                placeholder="Dejar vacío si es el mismo",
+            )
+            policy_number = st.text_input("Número de póliza", placeholder="SP-PCS-009-12345")
+            prior_claims = st.number_input("Reclamaciones previas", min_value=0, max_value=20, value=0)
+            prior_coverage_used = st.number_input(
+                "Cobertura ya consumida en este período (RD$)",
+                min_value=0.0, max_value=5_000_000.0, step=10_000.0, value=0.0,
+            )
+
+        with col2:
+            amount = st.number_input(
+                "Monto solicitado (RD$)",
+                min_value=0.0, max_value=5_000_000.0, step=1_000.0,
+            )
+            incident_date = st.date_input(
+                "Fecha del incidente", value=date.today() - timedelta(days=3)
+            )
+            incident_time = st.text_input("Hora del incidente (HH:MM)", value="14:30")
+            days_since = (date.today() - incident_date).days
+            channel = st.selectbox("Canal de entrada", ["email", "phone", "presencial"])
+            incident_desc = st.text_area(
+                "Descripción del incidente",
+                placeholder="Colisión trasera en semáforo. Paragolpes y faro dañados...",
+                height=100,
+            )
+
+        st.divider()
+        st.subheader("Documentos aportados")
+
+        required = REQUIRED_DOCS.get(claim_type, [])
+        submitted_docs = []
+
+        if required:
+            doc_cols = st.columns(2)
+            for i, doc_key in enumerate(required):
+                with doc_cols[i % 2]:
+                    label = DOC_LABELS.get(doc_key, doc_key)
+                    if st.checkbox(label, key=f"doc_{i}"):
+                        submitted_docs.append(doc_key)
+        else:
+            st.error("Daños mecánicos (§2.5) — No cubiertos. Será rechazado automáticamente.")
+
+        with st.expander("Límites de cobertura SP-PCS-009"):
+            cov = COVERAGE[claim_type]
+            c1, c2 = st.columns(2)
+            c1.metric("Límite máximo", _fmt_rd(cov["max"]) if cov["max"] else "No cubierto")
+            c2.metric("Deducible", _fmt_rd(cov["deductible"]) if cov["max"] else "—")
+
+        submitted = st.form_submit_button("Procesar reclamación", type="primary")
+
+    # ── Procesamiento con agentes reales ──────────────────────────────────────
+    if submitted:
+        if not client_name.strip():
+            st.error("El nombre del asegurado es obligatorio.")
+            st.stop()
+
+        claim_id = f"EXP-2026-{uuid.uuid4().hex[:4].upper()}"
+        conductor = conductor_name.strip() or client_name.strip()
+
+        extracted = {
+            "claim_type": claim_type,
+            "client_name": client_name.strip().upper(),
+            "conductor_name": conductor.upper(),
+            "amount_requested": float(amount),
+            "submitted_docs": submitted_docs,
+            "prior_claims_count": int(prior_claims),
+            "prior_coverage_used": float(prior_coverage_used),
+            "days_since_incident": int(days_since),
+            "interaction_count": 1,
+            "proposal_rejected_before": False,
+            "incident_time": incident_time,
+            "channel": channel,
+            "description": incident_desc,
+            "doc_type": "fotos_danos",
+            "file_url": "",
+            "b_docs_complete": True,
+            "b_missing_docs": [],
+            "g_fraud_score": 0.0,
+            "g_ofac_flagged": False,
+        }
+
+        state = _build_state(claim_id, extracted)
+
+        st.divider()
+        st.subheader(f"Procesando expediente `{claim_id}`")
+
+        try:
+            from app.agents.agent_b import validate_claim_documents
+            from app.agents.agent_g import check_fraud_and_compliance
+            from app.agents.agent_f import predict_judicialization_risk
+            from app.agents.agent_c import extract_from_document
+            from app.agents.agent_d import check_policy_coverage
+            from app.agents.agent_e import decide_claim
+
+            # ── Agent B ──────────────────────────────────────────────────────
+            with st.expander("🔍 Agente B — Validación Documental", expanded=True):
+                with st.spinner("Verificando documentos..."):
+                    res_b = _run(validate_claim_documents(state))
+                state["extracted_data"].update(res_b.get("extracted_data", {}))
+                if res_b.get("decision") == "reject":
+                    st.error(f"❌ Rechazo inmediato: {state['extracted_data'].get('b_reject_reason', '')}")
+                    st.markdown(
+                        _badge("REJECT", STATUS_COLORS["reject"]),
+                        unsafe_allow_html=True,
+                    )
+                    st.stop()
+                missing = state["extracted_data"].get("b_missing_docs", [])
+                if missing:
+                    st.warning(f"Documentos faltantes: {', '.join(missing)}")
+                else:
+                    st.success("✅ Documentos completos")
+                if state["extracted_data"].get("flag_cheque_propietario"):
+                    st.info("ℹ️ R-SP-PCS-09-002: Conductor ≠ propietario — cheque a nombre del propietario")
+
+            # ── Agent G ──────────────────────────────────────────────────────
+            with st.expander("🛡️ Agente G — OFAC + Fraude", expanded=True):
+                with st.spinner("Verificando listas de sanciones y score de fraude..."):
+                    res_g = _run(check_fraud_and_compliance(state))
+                state["extracted_data"].update(res_g.get("extracted_data", {}))
+                state["hitl_required"] = res_g.get("hitl_required", False)
+
+                g = state["extracted_data"]
+                c1, c2, c3 = st.columns(3)
+                ofac_ok = not g.get("g_ofac_flagged", False)
+                c1.metric("OFAC", "LIMPIO" if ofac_ok else f"⚠️ {g.get('g_ofac_match_name', '')}")
+                c2.metric("Score fraude", f"{g.get('g_fraud_score', 0):.0%}")
+                c3.metric("Debida diligencia", g.get("g_due_diligence", "simplificada").upper())
+
+                if g.get("g_ofac_flagged"):
+                    st.error(f"⚠️ OFAC: {g.get('g_ofac_match_name')} — score {g.get('g_ofac_match_score', 0):.0f}%")
+
+            # ── Agent F ──────────────────────────────────────────────────────
+            with st.expander("⚖️ Agente F — Riesgo Judicialización (XGBoost)", expanded=True):
+                with st.spinner("Prediciendo riesgo de litigio..."):
+                    res_f = _run(predict_judicialization_risk(state))
+                state["extracted_data"].update(res_f.get("extracted_data", {}))
+                f = state["extracted_data"]
+                risk = f.get("f_judi_risk_level", "LOW")
+                risk_color = {"HIGH": "#dc3545", "MEDIUM": "#ffc107", "LOW": "#28a745"}[risk]
+                c1, c2 = st.columns(2)
+                c1.metric("Probabilidad litigio", f"{f.get('f_judi_probability', 0):.1%}")
+                c2.metric("Nivel de riesgo", risk)
+                st.caption(f"Modelo: {f.get('f_model_used', '—')}")
+
+            # ── Agent C ──────────────────────────────────────────────────────
+            with st.expander("📸 Agente C — Extracción VLM (Claude Vision)", expanded=True):
+                if not HAS_KEY:
+                    st.warning("Sin API key — modo PoC (descripción textual)")
+                with st.spinner("Analizando documentos..."):
+                    res_c = _run(extract_from_document(state))
+                state["extracted_data"].update(res_c.get("extracted_data", {}))
+                c_res = state["extracted_data"].get("c_result", {})
+                if "error" not in c_res:
+                    st.json(c_res)
+                else:
+                    st.caption(f"Resultado: {c_res}")
+
+            # ── Agent D ──────────────────────────────────────────────────────
+            with st.expander("📋 Agente D — Cobertura RAG (ChromaDB + Claude)", expanded=True):
+                if not HAS_KEY:
+                    st.warning("Sin API key — fallback a reglas SP-PCS-009 hardcoded")
+                with st.spinner("Consultando póliza..."):
+                    res_d = _run(check_policy_coverage(state))
+                state["policy_check"] = res_d.get("policy_check", {})
+                pc = state["policy_check"]
+
+                c1, c2, c3, c4 = st.columns(4)
+                c1.metric("Cubierto", "Sí" if pc.get("covered") else "No")
+                c2.metric("Cobertura máx.", _fmt_rd(pc.get("max_coverage", 0)))
+                c3.metric("Deducible", _fmt_rd(pc.get("deductible", 0)))
+                c4.metric("Neto pagable", _fmt_rd(pc.get("net_payable", 0)))
+                st.caption(f"Sección: {pc.get('policy_section', '—')}  ·  Confianza: {pc.get('confidence', 0):.0%}")
+
+                chunks = pc.get("context_chunks", [])
+                if chunks:
+                    with st.expander(f"📄 Chunks RAG recuperados ({len(chunks)})", expanded=False):
+                        for ch in chunks:
+                            st.markdown(f"**{ch['source']}** (dist: {ch['distance']})")
+                            st.text(ch["document"][:300] + "..." if len(ch["document"]) > 300 else ch["document"])
+                            st.divider()
+                elif rag_ok:
+                    st.caption("→ ChromaDB sin documentos suficientes — usando fallback")
+
+            # ── Agent E ──────────────────────────────────────────────────────
+            with st.expander("🧠 Agente E — Decisión Final (CoT + HITL)", expanded=True):
+                if not HAS_KEY:
+                    st.warning("Sin API key — usando _rule_based_decision() determinista")
+                with st.spinner("Tomando decisión..."):
+                    res_e = _run(decide_claim(state))
+                state.update(res_e)
+                state["extracted_data"].update(res_e.get("extracted_data", {}))
+
+                decision = state.get("decision", "request_info")
+                color = STATUS_COLORS.get(decision, "#6c757d")
+                st.markdown(
+                    f"**Decisión:** " + _badge(decision.upper(), color),
+                    unsafe_allow_html=True,
+                )
+                rationale = state["extracted_data"].get("e_rationale", "")
+                if rationale:
+                    st.info(f"💬 {rationale}")
+
+            # ── Resultado final ───────────────────────────────────────────────
+            st.divider()
+            decision = state.get("decision", "request_info")
+            status_val = state.get("status", "VALIDATING")
+            color = STATUS_COLORS.get(decision, "#6c757d")
+
+            st.markdown(
+                f"## Resultado: " + _badge(decision.upper(), color),
+                unsafe_allow_html=True,
+            )
+
+            rc1, rc2, rc3 = st.columns(3)
+            rc1.metric("Expediente", claim_id)
+            rc2.metric("Estado", status_val)
+            if decision == "approve":
+                rc3.metric("Pago autorizado", _fmt_rd(state["policy_check"].get("net_payable", 0)))
+            elif decision == "hitl":
+                rc3.metric("Cola HITL", "Enviado a revisión humana")
+            elif decision == "request_info":
+                missing = state["extracted_data"].get("b_missing_docs", [])
+                rc3.metric("Documentos pendientes", str(len(missing)))
+
+        except Exception as exc:
+            st.error(f"Error en el pipeline: {exc}")
+            import traceback
+            st.code(traceback.format_exc())
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# PAGE 2 — Gestión Pólizas
+# ══════════════════════════════════════════════════════════════════════════════
+elif page == "Gestión Pólizas":
+    st.title("Gestión de Pólizas — Base de Conocimiento RAG")
+    st.caption("Sube documentos de póliza para que el Agente D los consulte al evaluar reclamaciones")
+
+    # Status actual
+    col_s1, col_s2 = st.columns(2)
+    col_s1.metric(
+        "Estado ChromaDB",
+        rag_state["status"].upper(),
+        delta="embedded" if rag_state["status"] != "unavailable" else None,
+    )
+    col_s2.metric("Chunks indexados", rag_state.get("docs", 0))
+
+    st.divider()
+
+    # Documentos ya indexados
+    st.subheader("Documentos en la base de conocimiento")
+    policies_dir = Path(os.environ["DATA_DIR"]) / "policies"
+    files_in_dir = list(policies_dir.glob("*.md")) if policies_dir.exists() else []
+
+    if files_in_dir:
+        for f in files_in_dir:
+            size_kb = f.stat().st_size // 1024
+            st.markdown(f"📄 **{f.name}** — {size_kb} KB")
+    else:
+        st.info("No hay documentos en data/policies/")
+
+    st.divider()
+
+    # Uploader de nuevas pólizas
+    st.subheader("Subir nueva póliza")
+    st.caption(
+        "Sube un fichero .md con el contenido de la póliza. "
+        "Se fragmentará en chunks de 600 caracteres y se indexará en ChromaDB."
+    )
+
+    uploaded = st.file_uploader(
+        "Selecciona un fichero de póliza (.md o .txt)",
+        type=["md", "txt"],
+        help="El documento debe estar en español y describir coberturas, exclusiones, deducibles y límites.",
+    )
+
+    if uploaded is not None:
+        content = uploaded.read().decode("utf-8")
+        st.text_area("Vista previa (primeros 500 chars)", content[:500] + "...", height=150)
+
+        col_u1, col_u2 = st.columns([1, 3])
+        if col_u1.button("Ingestar en ChromaDB", type="primary"):
+            save_path = policies_dir / uploaded.name
+            policies_dir.mkdir(parents=True, exist_ok=True)
+            save_path.write_text(content, encoding="utf-8")
+
+            with st.spinner(f"Ingestionando {uploaded.name}..."):
+                try:
+                    from app.rag.ingestion import ingest_policies
+                    from app.rag.retriever import reset_retriever_cache
+                    total = _run(ingest_policies(policies_dir))
+                    reset_retriever_cache()
+                    st.cache_resource.clear()
+                    st.success(f"✅ {total} chunks indexados. ChromaDB actualizado.")
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Error durante la ingestión: {e}")
+
+    st.divider()
+
+    # Test RAG query
+    st.subheader("Probar consulta RAG")
+    test_query = st.text_input(
+        "Pregunta de prueba",
+        placeholder="¿Cuál es el deducible para daños propios?",
+    )
+    if st.button("Consultar") and test_query:
+        with st.spinner("Buscando en ChromaDB..."):
+            try:
+                from app.rag.retriever import get_coverage_retriever, reset_retriever_cache
+                reset_retriever_cache()
+                retriever = _run(get_coverage_retriever())
+                if retriever and retriever._col.count() > 0:
+                    results = retriever.query(test_query, n_results=3)
+                    if results:
+                        for i, r in enumerate(results, 1):
+                            with st.expander(f"Resultado {i} — {r['source']} (distancia: {r['distance']})", expanded=i == 1):
+                                st.write(r["document"])
+                    else:
+                        st.warning("Sin resultados. Verifica que hay documentos indexados.")
+                else:
+                    st.warning("ChromaDB sin documentos. Sube una póliza primero.")
+            except Exception as e:
+                st.error(f"Error: {e}")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# PAGE 3 — Cola HITL
+# ══════════════════════════════════════════════════════════════════════════════
+elif page == "Cola HITL":
+    st.title("Cola Human-in-the-Loop (HITL)")
+    st.caption("Expedientes pendientes de revisión humana — SP-PCS-009 §3.3")
+
+    if "hitl_queue" not in st.session_state:
+        st.session_state.hitl_queue = [
+            {
+                "claim_id": "EXP-2026-0007",
+                "claim_type": "RC",
+                "client": "JIMÉNEZ PAREDES HECTOR",
+                "amount": 1_250_000,
+                "reason": "Monto neto RD$1,250,000 supera umbral HITL de RD$500,000",
+                "fraud_score": 0.05,
+                "judi_risk": "MEDIUM",
+                "created": "2026-05-20",
+            },
+            {
+                "claim_id": "EXP-2026-0023",
+                "claim_type": "danys_propis",
+                "client": "MORALES RUIZ PABLO",
+                "amount": 180_000,
+                "reason": "Score fraude 38% — indicios de horario nocturno y múltiples reclamaciones",
+                "fraud_score": 0.38,
+                "judi_risk": "LOW",
+                "created": "2026-05-21",
+            },
+            {
+                "claim_id": "EXP-2026-0041",
+                "claim_type": "DPA",
+                "client": "FICTICIO GOMEZ RIOS ANTONIO RAFAEL",
+                "amount": 320_000,
+                "reason": "Coincidencia en lista OFAC — revisión urgente Oficial de Cumplimiento",
+                "fraud_score": 0.00,
+                "judi_risk": "HIGH",
+                "created": "2026-05-22",
+            },
+        ]
+
+    queue = [e for e in st.session_state.hitl_queue if e.get("status") is None]
+    st.metric("Expedientes en cola", len(queue))
+
+    if not queue:
+        st.success("✅ Cola HITL vacía — todos los expedientes han sido revisados.")
+
+    for item in queue:
+        with st.container(border=True):
+            h1, h2 = st.columns([3, 1])
+            with h1:
+                st.subheader(f"{item['claim_id']} — {CLAIM_TYPES.get(item['claim_type'], item['claim_type'])}")
+                st.markdown(f"**Cliente:** {item['client']}")
+                st.markdown(f"**Motivo HITL:** {item['reason']}")
+                st.caption(f"Creado: {item['created']}")
+            with h2:
+                st.metric("Monto", _fmt_rd(item["amount"]))
+                fraud_color = "#dc3545" if item["fraud_score"] > 0.30 else "#28a745"
+                st.markdown(
+                    f"**Fraude:** <span style='color:{fraud_color}'>{item['fraud_score']:.0%}</span>",
+                    unsafe_allow_html=True,
+                )
+                jc = {"HIGH": "#dc3545", "MEDIUM": "#ffc107", "LOW": "#28a745"}.get(item["judi_risk"], "#6c757d")
+                st.markdown(
+                    f"**Litigio:** <span style='color:{jc}'>{item['judi_risk']}</span>",
+                    unsafe_allow_html=True,
+                )
+
+            ca, cr, ci = st.columns(3)
+            if ca.button("✅ Aprobar", key=f"a_{item['claim_id']}", type="primary"):
+                item["status"] = "approved"
+                st.success(f"{item['claim_id']} aprobado. Notificando a Tesorería...")
+                st.rerun()
+            if cr.button("❌ Rechazar", key=f"r_{item['claim_id']}"):
+                item["status"] = "rejected"
+                st.error(f"{item['claim_id']} rechazado.")
+                st.rerun()
+            if ci.button("📋 Pedir info", key=f"i_{item['claim_id']}"):
+                item["status"] = "info_requested"
+                st.warning(f"{item['claim_id']}: documentación adicional solicitada.")
+                st.rerun()
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# PAGE 4 — Dashboard KPIs
+# ══════════════════════════════════════════════════════════════════════════════
+elif page == "Dashboard KPIs":
+    st.title("Dashboard KPIs")
+    st.caption("Métricas de rendimiento del sistema Smart-Claims · Enero–Mayo 2026")
+
+    dates = [date(2026, 1, 1) + timedelta(weeks=i) for i in range(21)]
+    weekly = [28, 31, 25, 33, 29, 35, 38, 30, 27, 32, 40, 36, 34, 29, 37, 41, 38, 33, 35, 39, 42]
+    auto_pct = [68, 70, 71, 69, 72, 74, 73, 75, 76, 74, 77, 78, 76, 79, 78, 80, 81, 79, 82, 81, 83]
+    avg_days = [18, 17, 19, 16, 15, 14, 16, 13, 15, 14, 12, 13, 11, 12, 10, 11, 10, 9, 10, 9, 8]
+
+    k1, k2, k3, k4, k5 = st.columns(5)
+    k1.metric("Total expedientes", "712")
+    k2.metric("Automatización", "79%", delta="+15% vs. AS-IS")
+    k3.metric("Días promedio", "10.2", delta="-8 días vs. AS-IS", delta_color="inverse")
+    k4.metric("Cola HITL activa", "47")
+    k5.metric("Judicializados", "71 (10%)")
+
+    st.divider()
+    df_dates = pd.to_datetime([d.isoformat() for d in dates])
+
+    cl, cr = st.columns(2)
+    with cl:
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(
+            x=df_dates, y=auto_pct, mode="lines+markers",
+            line=dict(color=BRAND_COLOR, width=2),
+            fill="tozeroy", fillcolor="rgba(0,48,135,0.1)",
+        ))
+        fig.add_hline(y=80, line_dash="dash", line_color="green", annotation_text="Objetivo 80%")
+        fig.update_layout(title="Tasa de automatización semanal", yaxis_title="%", height=300, margin=dict(t=40, b=20))
+        st.plotly_chart(fig, use_container_width=True)
+
+    with cr:
+        fig2 = go.Figure()
+        fig2.add_trace(go.Bar(x=df_dates, y=avg_days, marker_color=BRAND_COLOR))
+        fig2.add_hline(y=18, line_dash="dash", line_color="red", annotation_text="AS-IS: 18 días")
+        fig2.update_layout(title="Días promedio de resolución", yaxis_title="Días", height=300, margin=dict(t=40, b=20))
+        st.plotly_chart(fig2, use_container_width=True)
+
+    cl2, cr2 = st.columns(2)
+    with cl2:
+        fig3 = px.pie(
+            values=[514, 47, 47, 71, 33],
+            names=["Aprobados auto", "Rechazados auto", "HITL pendiente", "Judicializados", "Info solicitada"],
+            color_discrete_sequence=["#28a745", "#dc3545", "#6f42c1", "#ffc107", "#17a2b8"],
+            title="Distribución de decisiones", hole=0.4,
+        )
+        fig3.update_layout(height=300, margin=dict(t=40, b=20))
+        st.plotly_chart(fig3, use_container_width=True)
+
+    with cr2:
+        fig4 = px.bar(
+            x=["Daños Propios", "DPA", "RC", "Robo"],
+            y=[3.2, 8.5, 12.1, 4.7],
+            title="% Judicialización por tipo (Agente F)",
+            color_discrete_sequence=[BRAND_COLOR],
+        )
+        fig4.add_hline(y=10, line_dash="dash", line_color="red", annotation_text="Histórico 10%")
+        fig4.update_layout(height=300, margin=dict(t=40, b=20), showlegend=False)
+        st.plotly_chart(fig4, use_container_width=True)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# PAGE 5 — Consulta Agente H
+# ══════════════════════════════════════════════════════════════════════════════
+elif page == "Consulta Agente H":
+    st.title("Consulta Agente H — Asistente Experto")
+    st.caption(
+        "RAG conversacional sobre SP-PCS-009, SP-PCS-022 y PEPIN-POL-CP-0006. "
+        "Las respuestas citan la sección exacta de la póliza."
+    )
+
+    if not HAS_KEY:
+        st.warning("⚠️ Sin ANTHROPIC_API_KEY el Agente H no puede responder. Configura la clave en los secrets.")
+
+    if "h_messages" not in st.session_state:
+        st.session_state.h_messages = [
+            {
+                "role": "assistant",
+                "content": (
+                    "Hola. Soy el Asistente Experto Smart-Claims. Puedo responder sobre coberturas, "
+                    "documentos requeridos, plazos, debida diligencia y judicialización. ¿En qué te ayudo?"
+                ),
+            }
+        ]
+
+    for msg in st.session_state.h_messages:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
+
+    suggested = [
+        "¿Qué documentos necesito para una reclamación DPA?",
+        "¿Cuál es el deducible para daños propios?",
+        "¿Cuándo se activa la debida diligencia ampliada?",
+        "¿Qué factores aumentan el riesgo de judicialización?",
+    ]
+    st.caption("Preguntas frecuentes:")
+    sug_cols = st.columns(len(suggested))
+    triggered = None
+    for i, (col, q) in enumerate(zip(sug_cols, suggested)):
+        if col.button(q[:28] + "…", key=f"sug_{i}", help=q):
+            triggered = q
+
+    user_input = st.chat_input("Escribe tu consulta sobre la póliza o el expediente...")
+    query = triggered or user_input
+
+    if query:
+        st.session_state.h_messages.append({"role": "user", "content": query})
+        with st.chat_message("user"):
+            st.markdown(query)
+
+        with st.chat_message("assistant"):
+            with st.spinner("Consultando póliza..."):
+                try:
+                    from app.agents.agent_h import answer_expert_query
+                    state_h = _build_state("QUERY-H", {"h_query": query})
+                    res_h = _run(answer_expert_query(state_h))
+                    answer = res_h["extracted_data"].get("h_result", "Sin respuesta.")
+                    sources = res_h["extracted_data"].get("h_sources", [])
+                except Exception as exc:
+                    answer = f"Error al consultar el agente: {exc}"
+                    sources = []
+
+            st.markdown(answer)
+            if sources:
+                st.caption(f"📄 Fuentes: {', '.join(sources)}")
+
+        st.session_state.h_messages.append({"role": "assistant", "content": answer})

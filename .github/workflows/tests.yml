@@ -1,0 +1,51 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install test dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pytest pytest-asyncio
+          pip install faker==25.2.0 rapidfuzz==3.9.3
+          pip install xgboost==2.0.3 scikit-learn==1.5.0 pandas==2.2.2 numpy==1.26.4
+          pip install sqlalchemy==2.0.31
+
+      - name: Generate synthetic dataset
+        run: |
+          cd smart-claims-agent
+          DATA_DIR=data python data/synthetic/generator.py
+
+      - name: Train Agent F model
+        run: |
+          cd smart-claims-agent
+          DATA_DIR=data python data/synthetic/train_agent_f.py
+
+      - name: Run unit tests
+        run: |
+          cd smart-claims-agent
+          DATA_DIR=data python -m pytest tests/ -v --tb=short
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: smart-claims-agent/.pytest_cache/
+          retention-days: 7

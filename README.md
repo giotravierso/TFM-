@@ -131,16 +131,18 @@ TFM/                            # Raíz del repositorio Git
 │   │   ├── main.py             # Entrypoint FastAPI
 │   │   ├── agents/
 │   │   │   ├── orchestrator.py # Agente A — LangGraph ReAct ✅
-│   │   │   ├── agent_b.py      # Validación documental (pendiente)
-│   │   │   ├── agent_c.py      # Extracción multimodal VLM (pendiente)
-│   │   │   ├── agent_d.py      # Verificación cobertura RAG (pendiente)
-│   │   │   ├── agent_e.py      # Resolución autónoma (pendiente)
-│   │   │   └── agent_g.py      # Fraude y cumplimiento (pendiente)
+│   │   │   ├── agent_b.py      # Validación documental ✅
+│   │   │   ├── agent_c.py      # Extracción multimodal VLM ✅
+│   │   │   ├── agent_d.py      # Verificación cobertura RAG ✅
+│   │   │   ├── agent_e.py      # Decisión CoT + HITL ✅
+│   │   │   ├── agent_f.py      # Judicialization XGBoost ✅
+│   │   │   ├── agent_g.py      # Fraude OFAC + AML ✅
+│   │   │   └── agent_h.py      # Asistente RAG conversacional ✅
 │   │   ├── tools/
 │   │   │   └── claim_tools.py  # Mock APIs (8 tools) ✅
 │   │   ├── rag/
-│   │   │   ├── ingest.py       # Ingesta de pólizas a ChromaDB (pendiente)
-│   │   │   └── retriever.py    # Retriever semántico (pendiente)
+│   │   │   ├── ingestion.py    # Ingesta de pólizas a ChromaDB ✅
+│   │   │   └── retriever.py    # Retriever semántico ✅
 │   │   ├── db/
 │   │   │   ├── models.py       # Modelos SQLAlchemy ✅
 │   │   │   └── session.py      # Gestión de conexión async ✅
@@ -157,17 +159,22 @@ TFM/                            # Raíz del repositorio Git
 │   └── app.py                  # Dashboard Streamlit (skeleton) ✅
 │
 ├── data/
-│   ├── synthetic/              # Dataset sintético de siniestros (.json)
-│   └── policies/               # Documentos de pólizas para RAG (.pdf/.txt)
-│
-├── scripts/
-│   ├── seed_dataset.py         # Genera el dataset sintético (pendiente)
-│   └── ingest_policies.py      # Ingesta pólizas en ChromaDB (pendiente)
+│   ├── synthetic/
+│   │   ├── generator.py        # Genera 100 expedientes sintéticos ✅
+│   │   ├── train_agent_f.py    # Entrena XGBoost (Agent F) ✅
+│   │   └── claims_dataset.json # 100 claims generados ✅
+│   ├── models/
+│   │   └── agent_f_xgboost.pkl # Modelo entrenado ✅
+│   ├── policies/               # 4 documentos Markdown para ChromaDB ✅
+│   └── ofac_mock.json          # Lista OFAC ficticia (14 entradas) ✅
 │
 └── tests/
-    ├── test_agents.py
-    ├── test_tools.py
-    └── test_rag.py
+    ├── conftest.py             # DATA_DIR + sys.path automático ✅
+    ├── test_agent_b.py         # 13 tests ✅
+    ├── test_agent_e.py         # 18 tests ✅
+    ├── test_agent_f.py         # 11 tests ✅
+    ├── test_agent_g.py         # 14 tests ✅
+    └── test_generator.py       # 18 tests ✅
 ```
 
 ---
@@ -348,55 +355,58 @@ docker exec -it sca-mariadb mariadb \
 
 ## 8. Agentes implementados
 
+Todos los agentes están implementados. El grafo LangGraph sigue el flujo:
+`triage → B → G → (HITL | F) → C → D → E → (HITL | END)`. El Agente H es accesible como endpoint independiente.
+
 ### Agente A — Orquestador (LangGraph ReAct) ✅
 
 **Fichero:** `backend/app/agents/orchestrator.py`
 
-Cerebro central del sistema. Recibe la reclamación, analiza el contenido y decide qué agente especializado debe intervenir. Gestiona el estado de cada expediente y activa el mecanismo HITL cuando el importe supera el umbral configurado.
+Cerebro central del sistema. Define el grafo de estado, las aristas condicionales y el `ClaimState` (TypedDict) compartido entre todos los agentes.
 
-- **Patrón:** ReAct (Reason → Act → Observe → Reason...)
-- **Estado:** `ClaimState` (TypedDict con LangGraph)
-- **HITL:** se activa cuando `amount > HITL_AMOUNT_THRESHOLD`
-
-### Agente B — Validación documental *(pendiente)*
+### Agente B — Validación documental ✅
 
 **Fichero:** `backend/app/agents/agent_b.py`
 
-Verifica contrato vigente y documentación aportada. Llama al Agente G para el cribado OFAC antes de continuar el flujo. Solicita documentación adicional si es necesario.
+Verifica documentos según tipo de reclamación (R-SP-PCS-09-001). Rechaza automáticamente `danys_mecanics` (§2.5). Detecta si el conductor ≠ titular (R-SP-PCS-09-002). Rellena `b_missing_docs`, `b_docs_complete`.
 
-**Pain points:** dependencia de procesos manuales · controles no integrados.
-
-### Agente C — Extracción multimodal (VLM) *(pendiente)*
+### Agente C — Extracción multimodal (VLM) ✅
 
 **Fichero:** `backend/app/agents/agent_c.py`
 
-Extrae datos estructurados de facturas, fotografías de daños y actas usando Claude con visión. Fallback a OCR (Tesseract) para documentos de baja calidad.
+Usa `claude-sonnet-4-20250514` con visión para extraer datos de fotos de daños, cotizaciones de taller y actas policiales. Modo PoC: descripción textual simulada cuando no hay binarios de imagen reales.
 
-**Pain points:** subjetividad en evaluación técnica · transcripción manual.
-
-### Agente D — Verificación de cobertura (RAG) *(pendiente)*
+### Agente D — Verificación de cobertura (RAG) ✅
 
 **Fichero:** `backend/app/agents/agent_d.py`
 
-Consulta ChromaDB con las pólizas de Seguros Pepín para determinar cobertura, importe máximo y franquicia. Devuelve el importe neto a pagar.
+Consulta ChromaDB (colección `smart_claims_policies`) con los términos del siniestro. Aplica R-SP-PCS-09-003 (cobertura restante) y R-SP-PCS-09-004 (deducible). Fallback hardcoded a los límites SP-PCS-009 cuando ChromaDB no está disponible.
 
-**Pain points:** falta de criterios estandarizados · controles manuales.
-
-### Agente E — Resolución autónoma *(pendiente)*
+### Agente E — Decisión y resolución (CoT + HITL) ✅
 
 **Fichero:** `backend/app/agents/agent_e.py`
 
-Toma la decisión final y ejecuta la acción via Mock APIs. Registra el razonamiento completo (CoT) en MariaDB.
+Chain-of-Thought vía Claude: devuelve `{decision, rationale, confidence}`. Cuatro disparadores HITL: OFAC, monto > RD$500.000, fraude > 30%, confianza < 75%. Fallback `_rule_based_decision()` si la llamada al LLM falla.
 
-**Reglas:** cubierto + bajo umbral → pago · cubierto + alto umbral → HITL · no cubierto → rechazo · docs incompletos → solicitud.
+### Agente F — Prevención judicialización (XGBoost) ✅
 
-### Agente G — Fraude y cumplimiento (LA/FT) *(pendiente)*
+**Fichero:** `backend/app/agents/agent_f.py`  
+**Modelo:** `data/models/agent_f_xgboost.pkl`
 
-**Fichero:** `backend/app/agents/agent_g.py`
+Predice probabilidad de litigio (SP-PCS-022) con 10 variables de negocio. Fallback heurístico cuando el modelo no está cargado. Explica el riesgo con SHAP-style feature weights.
 
-Verifica listas OFAC/ONU y calcula score de riesgo. Se invoca como **filtro de entrada**, alineado con política PEPIN-POL-CP-0006.
+### Agente G — Fraude y cumplimiento (LA/FT) ✅
 
-**Pain points:** compliance como filtro de salida · brecha en debida diligencia temprana.
+**Fichero:** `backend/app/agents/agent_g.py`  
+**Lista OFAC:** `data/ofac_mock.json`
+
+Fuzzy matching (rapidfuzz `token_sort_ratio ≥ 85`) contra lista OFAC mock. Calcula `g_fraud_score` con 6 señales heurísticas. Determina nivel de debida diligencia: `"simplificada"` o `"ampliada"` (PEPIN-POL-CP-0006).
+
+### Agente H — Asistente experto (RAG conversacional) ✅
+
+**Fichero:** `backend/app/agents/agent_h.py`
+
+Responde consultas en lenguaje natural sobre SP-PCS-009, SP-PCS-022 y PEPIN-POL-CP-0006 enriquecidas con el contexto del expediente activo. Comparte el retriever ChromaDB con el Agente D.
 
 ---
 
@@ -458,21 +468,25 @@ docker exec -it sca-backend alembic current
 
 ## 10. RAG y base de conocimiento
 
-Documentos de referencia en `data/policies/`:
-- `SP-PCS-009` — Procedimiento reclamación estándar
-- `SP-PCS-022` — Reclamación judicializada
-- `SP-PCS-003` — Fianzas judiciales
-- `PEPIN-POL-CP-0006` — Política de debida diligencia
+Documentos de referencia en `data/policies/` (Markdown, ingestados automáticamente al arrancar el backend):
+
+| Fichero | Contenido |
+|---|---|
+| `poliza_sp_pcs_009.md` | Proceso estándar SP-PCS-009 (10 etapas, límites, deducibles) |
+| `ficha_sp_pcs_009_proceso.md` | Documentos requeridos por tipo y KPIs de referencia |
+| `ficha_sp_pcs_022.md` | Proceso de reclamación judicializada SP-PCS-022 |
+| `politica_dda.md` | Política debida diligencia PEPIN-POL-CP-0006 (OFAC/ONU) |
+
+La ingesta se lanza en el `lifespan` de FastAPI (`app/main.py`) — no requiere intervención manual. Si ChromaDB no está listo, el backend arranca igualmente con fallback hardcoded.
 
 ```bash
-# Ingesta inicial (una vez colocados los PDFs en data/policies/)
-docker exec -it sca-backend python scripts/ingest_policies.py
+# Ver chunks ingestados (desde backend en ejecución)
 curl http://localhost:8080/api/v1/collections
 ```
 
-- **Colección:** `pepin_policies`
-- **Embedding:** `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
-- **Chunk size:** 512 tokens · solapamiento: 50
+- **Colección:** `smart_claims_policies`
+- **Embedding:** `sentence-transformers/all-MiniLM-L6-v2`
+- **Chunk size:** 600 caracteres · solapamiento: 100
 
 ---
 
@@ -508,20 +522,33 @@ docker compose logs -f frontend   # Hot-reload automático al guardar
 
 ## 13. Testing
 
+**84 tests · 0 fallos** (ejecución local sin Docker, sin LLM, sin ChromaDB).
+
 ```bash
-docker exec -it sca-backend pytest tests/ -v
-docker exec -it sca-backend pytest tests/ --cov=app --cov-report=term-missing
-docker exec -it sca-backend pytest tests/test_e2e.py -v -s
+cd smart-claims-agent
+
+# Instalar dependencias de test (solo primera vez)
+pip install pytest pytest-asyncio faker==25.2.0 rapidfuzz==3.9.3 \
+    xgboost==2.0.3 scikit-learn==1.5.0 pandas==2.2.2 numpy==1.26.4 \
+    sqlalchemy==2.0.31 anthropic
+
+# Generar dataset + entrenar modelo (solo primera vez)
+DATA_DIR=data python data/synthetic/generator.py
+DATA_DIR=data python data/synthetic/train_agent_f.py
+
+# Ejecutar suite completa
+DATA_DIR=data python -m pytest tests/ -v
 ```
 
-| Escenario | Resultado esperado |
-|---|---|
-| Daños propios + docs completos + importe bajo | Pago automático |
-| Daños propios + docs completos + importe alto | HITL activado |
-| Tipo de siniestro no cubierto | Rechazo justificado |
-| Documentación incompleta | Solicitud de información |
-| Cliente en lista OFAC | Bloqueo en filtro temprano |
-| Score de fraude alto | HITL activado |
+| Suite | Tests | Qué cubre |
+|---|---|---|
+| `test_agent_b.py` | 13 | Validación documental, reglas por tipo, auto-rechazo mecánicos |
+| `test_agent_e.py` | 18 | HITL triggers (OFAC/monto/fraude/confianza), CoT mock, status mapping |
+| `test_agent_f.py` | 11 | Heurística judicialization, keys de salida, riesgo HIGH/MEDIUM/LOW |
+| `test_agent_g.py` | 14 | OFAC fuzzy match, fraud score, debida diligencia ampliada/simplificada |
+| `test_generator.py` | 18 | Distribución claims, schema, reglas de negocio, HITL rate |
+
+CI/CD: `.github/workflows/tests.yml` ejecuta la suite completa en cada push a `main`/`develop`.
 
 ---
 
@@ -589,7 +616,7 @@ CHROMA_COLLECTION=pepin_policies
 BACKEND_URL=http://backend:8000
 
 # ── Lógica de negocio ────────────────────────────────────────
-HITL_AMOUNT_THRESHOLD=5000.0    # Importe (€) que activa revisión humana
+HITL_AMOUNT_THRESHOLD=500000.0  # Monto (RD$) que activa revisión humana
 
 # ── General ──────────────────────────────────────────────────
 ENVIRONMENT=development
