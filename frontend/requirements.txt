@@ -13,9 +13,5 @@ xgboost>=2.1.0
 scikit-learn>=1.5.2
 numpy>=2.0.0
 
-# RAG / ChromaDB
-chromadb>=0.6.0
-sentence-transformers>=3.2.0
-
 # Utilities
 faker>=33.0.0

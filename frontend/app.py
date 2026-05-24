@@ -57,6 +57,10 @@ def _run(coro):
 def _init_rag() -> dict:
     """Ingest policies into embedded ChromaDB if collection is empty."""
     try:
+        import chromadb  # noqa: F401 — check availability first
+    except ImportError:
+        return {"status": "unavailable", "docs": 0, "error": "chromadb no instalado"}
+    try:
         from app.rag.retriever import get_coverage_retriever, reset_retriever_cache
         from app.rag.ingestion import ingest_policies
 
