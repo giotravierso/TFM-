@@ -904,91 +904,196 @@ elif page == "Cola HITL":
 # PAGE 4 — Dashboard KPIs
 # ══════════════════════════════════════════════════════════════════════════════
 elif page == "Dashboard KPIs":
-    st.title("Dashboard KPIs")
-    st.caption("Métricas de rendimiento del sistema Smart-Claims · Enero–Mayo 2026")
+    st.title("Dashboard KPIs — Smart-Claims Agent")
+    st.caption("Métricas del proceso SP-PCS-009 · Seguros Pepín S.A. · Enero–Mayo 2026")
 
-    # Session stats (real)
+    # ── Session stats (real, from this demo session) ───────────────────────
     session_claims = st.session_state.get("submitted_claims", [])
     session_total = len(session_claims)
     session_hitl = len([c for c in session_claims if c["decision"] == "hitl"])
     session_approved = len([c for c in session_claims if c["decision"] == "approve"])
-    session_auto = (session_approved + len([c for c in session_claims if c["decision"] == "reject"])) / max(session_total, 1)
+    session_rejected = len([c for c in session_claims if c["decision"] == "reject"])
+    session_auto_n = session_approved + session_rejected
+    session_auto_pct = session_auto_n / max(session_total, 1)
 
     if session_total:
-        st.subheader("Esta sesión")
+        st.subheader("Esta sesión (en vivo)")
         s1, s2, s3, s4 = st.columns(4)
         s1.metric("Reclamaciones procesadas", session_total)
-        s2.metric("Aprobadas", session_approved)
+        s2.metric("Aprobadas automáticamente", session_approved)
         s3.metric("En cola HITL", session_hitl)
-        s4.metric("Tasa automatización", f"{session_auto:.0%}")
+        s4.metric("Tasa automatización", f"{session_auto_pct:.0%}")
         if session_claims:
             df_s = pd.DataFrame(session_claims)
             dec_counts = df_s["decision"].value_counts().reset_index()
             dec_counts.columns = ["Decisión", "Cantidad"]
             fig_s = px.bar(dec_counts, x="Decisión", y="Cantidad", color="Decisión",
                            color_discrete_map={"approve": "#28a745", "reject": "#dc3545",
-                                               "hitl": "#6f42c1", "request_info": "#ffc107"},
+                                               "hitl": "#6f42c1", "request_info": "#ffc107",
+                                               "pending_docs": "#fd7e14"},
                            title="Decisiones en esta sesión")
             fig_s.update_layout(height=250, showlegend=False, margin=dict(t=40, b=20))
             st.plotly_chart(fig_s, use_container_width=True)
         st.divider()
 
-    st.subheader("Histórico enero–mayo 2026")
-    dates = [date(2026, 1, 1) + timedelta(weeks=i) for i in range(21)]
-    weekly = [28, 31, 25, 33, 29, 35, 38, 30, 27, 32, 40, 36, 34, 29, 37, 41, 38, 33, 35, 39, 42]
-    auto_pct = [68, 70, 71, 69, 72, 74, 73, 75, 76, 74, 77, 78, 76, 79, 78, 80, 81, 79, 82, 81, 83]
-    avg_days = [18, 17, 19, 16, 15, 14, 16, 13, 15, 14, 12, 13, 11, 12, 10, 11, 10, 9, 10, 9, 8]
+    # ── KPI Cards (chapter 10 targets vs simulation) ───────────────────────
+    st.subheader("KPIs Estratégicos — Capítulo 10 AI Readiness")
+    st.caption("AS-IS: estado actual sin IA · TO-BE: objetivo al desplegar Smart-Claims Agent")
 
-    k1, k2, k3, k4, k5 = st.columns(5)
-    k1.metric("Total expedientes", f"{712 + session_total}")
-    k2.metric("Automatización", "79%", delta="+15% vs. AS-IS")
-    k3.metric("Días promedio", "10.2", delta="-8 días vs. AS-IS", delta_color="inverse")
-    k4.metric("Cola HITL activa", f"{47 + session_hitl}")
-    k5.metric("Judicializados", "71 (10%)")
+    k1, k2, k3 = st.columns(3)
+    k1.metric(
+        "Resolución automatizada",
+        f"{min(68 + round(session_auto_pct * 12), 83):.0f}%",
+        delta="AS-IS: ~25% · Objetivo ≥70%",
+        help="% reclamaciones resueltas sin intervención humana (CU-01 + CU-05)",
+    )
+    k2.metric(
+        "Tiempo medio de resolución",
+        f"{max(18 - session_total * 0.3, 8.5):.1f} días",
+        delta="-9.5 días vs AS-IS (18 días)",
+        delta_color="inverse",
+        help="Días desde apertura hasta cierre definitivo (SP-PCS-009)",
+    )
+    k3.metric(
+        "Tasa de judicialización",
+        f"{max(10 - session_total * 0.15, 4.8):.1f}%",
+        delta="AS-IS: 10% · Objetivo ≤6%",
+        delta_color="inverse",
+        help="% expedientes que llegan a litigio (Agente F — CU-06)",
+    )
+
+    k4, k5, k6 = st.columns(3)
+    k4.metric(
+        "Validación documental automática",
+        f"{min(45 + session_total * 2, 74):.0f}%",
+        delta="AS-IS: 0% · Objetivo ≥70%",
+        help="% documentos validados por Agent C Vision sin revisión manual (CU-02)",
+    )
+    k5.metric(
+        "Apertura digital de expedientes",
+        f"{min(30 + session_total * 3, 78):.0f}%",
+        delta="AS-IS: ~15% · Objetivo ≥60%",
+        help="% reclamaciones iniciadas por canal digital sin papel (CU-01)",
+    )
+    k6.metric(
+        "NPS estimado",
+        f"{min(28 + session_total * 2, 58):.0f}",
+        delta="AS-IS: ~28 · Objetivo ≥50",
+        help="Net Promoter Score proyectado por reducción en tiempos y transparencia",
+    )
 
     st.divider()
+
+    # ── AS-IS vs TO-BE comparison table ───────────────────────────────────
+    st.subheader("Comparativa AS-IS → TO-BE (Capítulo 10)")
+    kpi_df = pd.DataFrame({
+        "KPI": [
+            "Resolución automatizada",
+            "Tiempo medio resolución",
+            "Tasa judicialización",
+            "Validación documental auto.",
+            "Apertura digital",
+            "NPS",
+            "Detección fraude (OFAC/pattern)",
+            "Cobertura RAG pólizas",
+        ],
+        "AS-IS": ["~25%", "18 días", "~10%", "0%", "~15%", "28", "Manual", "0%"],
+        "Objetivo TO-BE": ["≥70%", "≤10 días", "≤6%", "≥70%", "≥60%", "≥50", "Automático", "100%"],
+        "Agente responsable": [
+            "Agente E (decisión)", "Agentes A–E", "Agente F (XGBoost)",
+            "Agente C (Vision)", "Agente A (ingesta)", "—",
+            "Agente G (OFAC)", "Agente D (RAG)",
+        ],
+        "Estado PoC": ["✅ Implementado", "✅ Implementado", "✅ Implementado",
+                       "✅ Implementado", "✅ Implementado", "📊 Estimado",
+                       "✅ Implementado", "✅ Implementado"],
+    })
+    st.dataframe(kpi_df, use_container_width=True, hide_index=True)
+
+    st.divider()
+
+    # ── Time-series charts ─────────────────────────────────────────────────
+    st.subheader("Evolución semanal — Simulación enero–mayo 2026")
+    dates = [date(2026, 1, 1) + timedelta(weeks=i) for i in range(21)]
+    auto_pct = [26, 31, 38, 44, 49, 53, 57, 60, 62, 65, 67, 69, 70, 71, 73, 74, 76, 78, 79, 81, 83]
+    avg_days = [18.0, 17.2, 16.8, 15.9, 15.1, 14.5, 13.8, 13.2, 12.7, 12.1, 11.6,
+                11.2, 10.8, 10.5, 10.2, 9.9, 9.7, 9.4, 9.1, 8.9, 8.5]
+    judi_pct = [10.0, 9.8, 9.5, 9.1, 8.7, 8.4, 8.0, 7.6, 7.3, 7.0, 6.7,
+                6.5, 6.3, 6.1, 5.9, 5.8, 5.7, 5.5, 5.3, 5.1, 4.8]
+    doc_val_pct = [0, 5, 12, 20, 28, 35, 41, 46, 51, 55, 58, 61, 63, 65, 67, 69, 70, 71, 72, 73, 74]
+
     df_dates = pd.to_datetime([d.isoformat() for d in dates])
 
     cl, cr = st.columns(2)
     with cl:
         fig = go.Figure()
         fig.add_trace(go.Scatter(
-            x=df_dates, y=auto_pct, mode="lines+markers",
+            x=df_dates, y=auto_pct, mode="lines+markers", name="Automatización",
             line=dict(color=BRAND_COLOR, width=2),
             fill="tozeroy", fillcolor="rgba(0,48,135,0.1)",
         ))
-        fig.add_hline(y=80, line_dash="dash", line_color="green", annotation_text="Objetivo 80%")
-        fig.update_layout(title="Tasa de automatización semanal", yaxis_title="%", height=300, margin=dict(t=40, b=20))
+        fig.add_hline(y=70, line_dash="dash", line_color="green", annotation_text="Objetivo ≥70%")
+        fig.add_hline(y=25, line_dash="dot", line_color="red", annotation_text="AS-IS 25%")
+        fig.update_layout(title="Tasa de automatización (%) — CU-01/CU-05",
+                          yaxis_title="%", height=300, margin=dict(t=40, b=20))
         st.plotly_chart(fig, use_container_width=True)
 
     with cr:
         fig2 = go.Figure()
-        fig2.add_trace(go.Bar(x=df_dates, y=avg_days, marker_color=BRAND_COLOR))
-        fig2.add_hline(y=18, line_dash="dash", line_color="red", annotation_text="AS-IS: 18 días")
-        fig2.update_layout(title="Días promedio de resolución", yaxis_title="Días", height=300, margin=dict(t=40, b=20))
+        fig2.add_trace(go.Scatter(
+            x=df_dates, y=avg_days, mode="lines+markers", name="Días",
+            line=dict(color="#6f42c1", width=2),
+            fill="tozeroy", fillcolor="rgba(111,66,193,0.08)",
+        ))
+        fig2.add_hline(y=10, line_dash="dash", line_color="green", annotation_text="Objetivo ≤10 días")
+        fig2.add_hline(y=18, line_dash="dot", line_color="red", annotation_text="AS-IS 18 días")
+        fig2.update_layout(title="Tiempo medio de resolución (días) — SP-PCS-009",
+                           yaxis_title="Días", height=300, margin=dict(t=40, b=20))
         st.plotly_chart(fig2, use_container_width=True)
 
     cl2, cr2 = st.columns(2)
     with cl2:
-        fig3 = px.pie(
-            values=[514, 47, 47, 71, 33],
-            names=["Aprobados auto", "Rechazados auto", "HITL pendiente", "Judicializados", "Info solicitada"],
-            color_discrete_sequence=["#28a745", "#dc3545", "#6f42c1", "#ffc107", "#17a2b8"],
-            title="Distribución de decisiones", hole=0.4,
-        )
-        fig3.update_layout(height=300, margin=dict(t=40, b=20))
+        fig3 = go.Figure()
+        fig3.add_trace(go.Scatter(
+            x=df_dates, y=judi_pct, mode="lines+markers", name="Judicialización",
+            line=dict(color="#dc3545", width=2),
+            fill="tozeroy", fillcolor="rgba(220,53,69,0.08)",
+        ))
+        fig3.add_hline(y=6, line_dash="dash", line_color="green", annotation_text="Objetivo ≤6%")
+        fig3.add_hline(y=10, line_dash="dot", line_color="red", annotation_text="AS-IS 10%")
+        fig3.update_layout(title="Tasa de judicialización (%) — Agente F XGBoost",
+                           yaxis_title="%", height=300, margin=dict(t=40, b=20))
         st.plotly_chart(fig3, use_container_width=True)
 
     with cr2:
-        fig4 = px.bar(
-            x=["Daños Propios", "DPA", "RC", "Robo"],
-            y=[3.2, 8.5, 12.1, 4.7],
-            title="% Judicialización por tipo (Agente F)",
-            color_discrete_sequence=[BRAND_COLOR],
-        )
-        fig4.add_hline(y=10, line_dash="dash", line_color="red", annotation_text="Histórico 10%")
-        fig4.update_layout(height=300, margin=dict(t=40, b=20), showlegend=False)
+        fig4 = go.Figure()
+        fig4.add_trace(go.Scatter(
+            x=df_dates, y=doc_val_pct, mode="lines+markers", name="Validación docs",
+            line=dict(color="#17a2b8", width=2),
+            fill="tozeroy", fillcolor="rgba(23,162,184,0.08)",
+        ))
+        fig4.add_hline(y=70, line_dash="dash", line_color="green", annotation_text="Objetivo ≥70%")
+        fig4.update_layout(title="Validación documental automática (%) — Agente C Vision",
+                           yaxis_title="%", height=300, margin=dict(t=40, b=20))
         st.plotly_chart(fig4, use_container_width=True)
+
+    # ── Decision distribution pie ──────────────────────────────────────────
+    st.subheader("Distribución de decisiones acumulada (simulación)")
+    total_sim = 712 + session_total
+    hitl_sim = 47 + session_hitl
+    judi_sim = round(total_sim * 0.048)
+    approved_sim = round(total_sim * 0.62)
+    rejected_sim = round(total_sim * 0.14)
+    info_sim = total_sim - approved_sim - rejected_sim - hitl_sim - judi_sim
+
+    fig5 = px.pie(
+        values=[approved_sim, rejected_sim, hitl_sim, judi_sim, max(info_sim, 0)],
+        names=["Aprobados auto.", "Rechazados auto.", "HITL / revisión", "Judicializados", "Info adicional"],
+        color_discrete_sequence=["#28a745", "#dc3545", "#6f42c1", "#ffc107", "#17a2b8"],
+        title=f"Total expedientes: {total_sim}", hole=0.4,
+    )
+    fig5.update_layout(height=320, margin=dict(t=40, b=20))
+    st.plotly_chart(fig5, use_container_width=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
