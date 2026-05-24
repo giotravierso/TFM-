@@ -517,12 +517,58 @@ if page in ("Nueva Reclamación", "Reportar Reclamación"):
 
         state = _build_state(claim_id, extracted)
 
+        st.divider()
+
+        # ── Pre-validación de documentos con Agent C ──────────────────────────
+        from app.agents.agent_c import validate_document as _validate_doc
+
+        image_uploads = {k: v for k, v in uploaded_files.items() if k in IMAGE_DOC_TYPES}
+        all_uploads = uploaded_files  # includes non-image docs too
+
+        doc_validation_passed = True
+        invalid_docs = []
+
+        if all_uploads:
+            val_header = "🔎 Validando documentos adjuntos..." if not show_scores else None
+            with st.expander(
+                "🔎 Validación de documentos (Agent C — pre-pipeline)",
+                expanded=True,
+            ) if show_scores else st.spinner("Verificando que los documentos sean válidos..."):
+
+                val_results = {}
+                for dk, f in all_uploads.items():
+                    f.seek(0)
+                    img_bytes = f.read()
+                    data_uri = _to_data_uri(img_bytes, _mime(f.name))
+                    result = _run(_validate_doc(dk, data_uri, claim_id))
+                    val_results[dk] = result
+
+                    if show_scores:
+                        icon = "✅" if result["valid"] else ("⚠️" if result.get("skipped") else "❌")
+                        label = DOC_LABELS.get(dk, dk)
+                        note = result.get("reason", "")
+                        if result.get("skipped"):
+                            st.caption(f"{icon} **{label}** — {note}")
+                        elif result["valid"]:
+                            st.success(f"{icon} **{label}** — {note}")
+                        else:
+                            st.error(f"{icon} **{label}** — {note}")
+
+                    if not result["valid"] and not result.get("skipped"):
+                        doc_validation_passed = False
+                        invalid_docs.append((dk, result.get("reason", "")))
+
+        if invalid_docs:
+            st.error("Los siguientes documentos no superaron la validación:")
+            for dk, reason in invalid_docs:
+                st.markdown(f"  • **{DOC_LABELS.get(dk, dk)}**: {reason}")
+            st.warning("Por favor sube documentos válidos y vuelve a intentarlo.")
+            st.stop()
+
         if show_scores:
-            st.divider()
             st.subheader(f"Procesando expediente `{claim_id}`")
         else:
-            st.divider()
-            st.info("Estamos procesando tu reclamación. Por favor espera...")
+            st.info("Documentos validados. Procesando tu reclamación...")
 
         try:
             from app.agents.agent_b import validate_claim_documents

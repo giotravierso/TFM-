@@ -66,6 +66,140 @@ _DEFAULT_PROMPT = (
     "the provided document or description and return ONLY valid JSON."
 )
 
+# ── Validation prompts per document type ──────────────────────────────────────
+
+_VALIDATION_PROMPTS: dict[str, str] = {
+    "fotos_danos": (
+        "You are a vehicle insurance expert. Look at this image and determine if it shows "
+        "visible vehicle damage suitable for an insurance claim. "
+        "Return ONLY valid JSON with keys: "
+        "valid (boolean), reason (string explaining the result), "
+        "damage_visible (boolean), vehicle_present (boolean)."
+    ),
+    "fotos_danos_con_placa": (
+        "You are a vehicle insurance expert. Determine if this image shows a damaged vehicle "
+        "with a clearly visible license plate. "
+        "Return ONLY valid JSON with keys: "
+        "valid (boolean), reason (string), plate_visible (boolean), damage_visible (boolean)."
+    ),
+    "acta_policial": (
+        "You are a document verification specialist. Determine if this document is a police report "
+        "(acta policial) with an official header, case number, date, and officer signature. "
+        "Return ONLY valid JSON with keys: "
+        "valid (boolean), reason (string), has_case_number (boolean), has_date (boolean), has_signature (boolean)."
+    ),
+    "acta_policial_certificada": (
+        "Determine if this is a certified police report with official stamps/seals. "
+        "Return ONLY valid JSON: valid (boolean), reason (string), has_seal (boolean)."
+    ),
+    "cedula": (
+        "Determine if this image shows a Dominican Republic national ID (cédula de identidad). "
+        "Return ONLY valid JSON: valid (boolean), reason (string), name_visible (boolean), id_number_visible (boolean)."
+    ),
+    "licencia_conducir": (
+        "Determine if this image shows a valid driver's license. "
+        "Return ONLY valid JSON: valid (boolean), reason (string), name_visible (boolean), expiry_visible (boolean)."
+    ),
+    "cotizacion_taller": (
+        "Determine if this document is a workshop repair quote with itemized costs and a total. "
+        "Return ONLY valid JSON: valid (boolean), reason (string), has_total (boolean), has_items (boolean), taller_name (string)."
+    ),
+    "matricula": (
+        "Determine if this image shows a vehicle registration document (matrícula). "
+        "Return ONLY valid JSON: valid (boolean), reason (string), plate_number_visible (boolean)."
+    ),
+    "denuncia_policial": (
+        "Determine if this is an official police complaint/report document. "
+        "Return ONLY valid JSON: valid (boolean), reason (string), has_case_number (boolean)."
+    ),
+}
+
+_DEFAULT_VALIDATION_PROMPT = (
+    "Determine if this image or document is a valid, legible official document suitable "
+    "for an insurance claim. Return ONLY valid JSON: valid (boolean), reason (string)."
+)
+
+
+def _build_content(file_url: str, fallback_text: str) -> list[dict]:
+    """Build Claude Vision message content from data URI or fallback to text."""
+    if file_url and file_url.startswith("data:"):
+        header, b64data = file_url.split(",", 1)
+        media_type = header.split(":")[1].split(";")[0]
+        return [
+            {
+                "type": "image",
+                "source": {"type": "base64", "media_type": media_type, "data": b64data},
+            },
+            {"type": "text", "text": "Analyse this document as instructed."},
+        ]
+    if file_url and file_url.startswith("http"):
+        return [
+            {"type": "image", "source": {"type": "url", "url": file_url}},
+            {"type": "text", "text": "Analyse this document as instructed."},
+        ]
+    return [{"type": "text", "text": fallback_text}]
+
+
+async def validate_document(
+    doc_key: str,
+    file_url: str,
+    claim_id: str = "UNKNOWN",
+) -> dict:
+    """
+    Validate a single uploaded document using Claude Vision.
+
+    Returns:
+        {
+            "valid": bool,
+            "reason": str,
+            "doc_key": str,
+            "skipped": bool   # True when no API key available
+        }
+    """
+    if not ANTHROPIC_API_KEY:
+        return {
+            "valid": True,
+            "reason": "Validación omitida — API key no configurada",
+            "doc_key": doc_key,
+            "skipped": True,
+        }
+
+    system_prompt = _VALIDATION_PROMPTS.get(doc_key, _DEFAULT_VALIDATION_PROMPT)
+    content = _build_content(
+        file_url,
+        fallback_text=f"Document type expected: {doc_key}. No image available.",
+    )
+
+    try:
+        client = _get_client()
+        response = await client.messages.create(
+            model=VLM_MODEL,
+            max_tokens=256,
+            temperature=0,
+            system=system_prompt,
+            messages=[{"role": "user", "content": content}],
+        )
+        raw = response.content[0].text.strip()
+        if raw.startswith("```"):
+            raw = raw.split("```")[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+        result = json.loads(raw)
+        result.setdefault("valid", False)
+        result.setdefault("reason", "Sin respuesta del modelo")
+        result["doc_key"] = doc_key
+        result["skipped"] = False
+        logger.info("[Agent C] Validated %s for %s: valid=%s", doc_key, claim_id, result["valid"])
+        return result
+    except Exception as exc:
+        logger.warning("[Agent C] Validation failed for %s/%s: %s", doc_key, claim_id, exc)
+        return {
+            "valid": False,
+            "reason": f"Error al validar el documento: {exc}",
+            "doc_key": doc_key,
+            "skipped": False,
+        }
+
 
 async def extract_from_document(state: "ClaimState") -> dict:
     """
@@ -88,25 +222,7 @@ async def extract_from_document(state: "ClaimState") -> dict:
 
     system_prompt = _PROMPTS.get(doc_type, _DEFAULT_PROMPT)
 
-    # Build message content — use image_url block if we have a real URL,
-    # otherwise fall back to text description (PoC mode)
-    if file_url and file_url.startswith(("http", "data:")):
-        content: list[dict] = [
-            {
-                "type": "image",
-                "source": {
-                    "type": "url" if file_url.startswith("http") else "base64",
-                    "url": file_url if file_url.startswith("http") else None,
-                    "media_type": "image/jpeg",
-                    "data": file_url.split(",", 1)[1] if file_url.startswith("data:") else None,
-                },
-            },
-            {"type": "text", "text": "Extract the information as instructed."},
-        ]
-        # Remove None keys
-        content[0]["source"] = {k: v for k, v in content[0]["source"].items() if v is not None}
-    else:
-        content = [{"type": "text", "text": f"Document description:\n{description}"}]
+    content = _build_content(file_url, fallback_text=f"Document description:\n{description}")
 
     try:
         client = _get_client()
