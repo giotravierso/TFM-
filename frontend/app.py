@@ -15,6 +15,7 @@ Configuración:
 from __future__ import annotations
 
 import asyncio
+import base64
 import os
 import sys
 import uuid
@@ -213,6 +214,24 @@ STATUS_COLORS = {
 }
 
 
+IMAGE_DOC_TYPES = {"fotos_danos", "fotos_danos_con_placa"}
+PDF_DOC_TYPES = {
+    "acta_policial", "acta_policial_certificada", "acta_conciliacion",
+    "denuncia_policial", "formulario_aviso_accidente", "aviso_siniestro",
+    "cotizacion_taller", "presupuesto_piezas", "cedula", "licencia_conducir", "matricula",
+}
+
+
+def _to_data_uri(file_bytes: bytes, mime_type: str) -> str:
+    return f"data:{mime_type};base64,{base64.b64encode(file_bytes).decode()}"
+
+
+def _mime(filename: str) -> str:
+    ext = filename.rsplit(".", 1)[-1].lower()
+    return {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png",
+            "pdf": "application/pdf"}.get(ext, "application/octet-stream")
+
+
 def _fmt_rd(n: float) -> str:
     return f"RD$ {n:,.0f}"
 
@@ -222,6 +241,41 @@ def _badge(text: str, color: str) -> str:
         f'<span style="background:{color};color:white;padding:3px 12px;'
         f'border-radius:12px;font-size:0.9em;font-weight:bold">{text}</span>'
     )
+
+
+def _default_hitl_queue() -> list:
+    return [
+        {
+            "claim_id": "EXP-2026-0007",
+            "claim_type": "RC",
+            "client": "JIMÉNEZ PAREDES HECTOR",
+            "amount": 1_250_000,
+            "reason": "Monto neto RD$1,250,000 supera umbral HITL de RD$500,000",
+            "fraud_score": 0.05,
+            "judi_risk": "MEDIUM",
+            "created": "2026-05-20",
+        },
+        {
+            "claim_id": "EXP-2026-0023",
+            "claim_type": "danys_propis",
+            "client": "MORALES RUIZ PABLO",
+            "amount": 180_000,
+            "reason": "Score fraude 38% — indicios de horario nocturno y múltiples reclamaciones",
+            "fraud_score": 0.38,
+            "judi_risk": "LOW",
+            "created": "2026-05-21",
+        },
+        {
+            "claim_id": "EXP-2026-0041",
+            "claim_type": "DPA",
+            "client": "FICTICIO GOMEZ RIOS ANTONIO RAFAEL",
+            "amount": 320_000,
+            "reason": "Coincidencia en lista OFAC — revisión urgente Oficial de Cumplimiento",
+            "fraud_score": 0.00,
+            "judi_risk": "HIGH",
+            "created": "2026-05-22",
+        },
+    ]
 
 
 def _build_state(claim_id, extracted_data):
@@ -301,26 +355,45 @@ if page in ("Nueva Reclamación", "Reportar Reclamación"):
             )
 
         st.divider()
-        st.subheader("Documentos aportados")
+        st.subheader("Documentos adjuntos")
+        if page == "Reportar Reclamación":
+            st.caption("Adjunta los documentos requeridos. Las fotos deben mostrar claramente los daños.")
+        else:
+            st.caption("Sube los originales o copias digitalizadas. Las imágenes serán analizadas por Vision IA.")
 
         required = REQUIRED_DOCS.get(claim_type, [])
-        submitted_docs = []
+        uploaded_files: dict[str, object] = {}
 
         if required:
             doc_cols = st.columns(2)
             for i, doc_key in enumerate(required):
                 with doc_cols[i % 2]:
                     label = DOC_LABELS.get(doc_key, doc_key)
-                    if st.checkbox(label, key=f"doc_{i}"):
-                        submitted_docs.append(doc_key)
+                    if doc_key in IMAGE_DOC_TYPES:
+                        f = st.file_uploader(
+                            f"📷 {label}",
+                            type=["jpg", "jpeg", "png"],
+                            key=f"doc_{i}",
+                            help="JPG o PNG — será analizado por IA",
+                        )
+                    else:
+                        f = st.file_uploader(
+                            f"📄 {label}",
+                            type=["pdf", "jpg", "jpeg", "png"],
+                            key=f"doc_{i}",
+                            help="PDF, JPG o PNG",
+                        )
+                    if f is not None:
+                        uploaded_files[doc_key] = f
         else:
             st.error("Daños mecánicos (§2.5) — No cubiertos. Será rechazado automáticamente.")
 
-        with st.expander("Límites de cobertura SP-PCS-009"):
-            cov = COVERAGE[claim_type]
-            c1, c2 = st.columns(2)
-            c1.metric("Límite máximo", _fmt_rd(cov["max"]) if cov["max"] else "No cubierto")
-            c2.metric("Deducible", _fmt_rd(cov["deductible"]) if cov["max"] else "—")
+        if required and show_scores:
+            with st.expander("Límites de cobertura SP-PCS-009"):
+                cov = COVERAGE[claim_type]
+                c1, c2 = st.columns(2)
+                c1.metric("Límite máximo", _fmt_rd(cov["max"]) if cov["max"] else "No cubierto")
+                c2.metric("Deducible", _fmt_rd(cov["deductible"]) if cov["max"] else "—")
 
         submitted = st.form_submit_button("Procesar reclamación", type="primary")
 
@@ -332,6 +405,22 @@ if page in ("Nueva Reclamación", "Reportar Reclamación"):
 
         claim_id = f"EXP-2026-{uuid.uuid4().hex[:4].upper()}"
         conductor = conductor_name.strip() or client_name.strip()
+
+        # Build submitted_docs list from uploaded files
+        submitted_docs = list(uploaded_files.keys())
+
+        # Find primary image for Agent C (first image-type doc uploaded)
+        primary_image_uri = ""
+        primary_doc_type = "fotos_danos"
+        for doc_key, f in uploaded_files.items():
+            if doc_key in IMAGE_DOC_TYPES:
+                img_bytes = f.read()
+                primary_image_uri = _to_data_uri(img_bytes, _mime(f.name))
+                primary_doc_type = doc_key
+                break
+        # Fallback: use first non-image upload as text input
+        if not primary_image_uri and uploaded_files:
+            primary_doc_type = next(iter(uploaded_files))
 
         extracted = {
             "claim_type": claim_type,
@@ -347,8 +436,9 @@ if page in ("Nueva Reclamación", "Reportar Reclamación"):
             "incident_time": incident_time,
             "channel": channel,
             "description": incident_desc,
-            "doc_type": "fotos_danos",
-            "file_url": "",
+            "doc_type": primary_doc_type,
+            "file_url": primary_image_uri,
+            "uploaded_doc_types": list(uploaded_files.keys()),
             "b_docs_complete": True,
             "b_missing_docs": [],
             "g_fraud_score": 0.0,
@@ -503,10 +593,34 @@ if page in ("Nueva Reclamación", "Reportar Reclamación"):
                     unsafe_allow_html=True,
                 )
                 st.caption(f"Número de expediente: **{claim_id}** — Guárdalo para hacer seguimiento.")
-                if "submitted_claims" not in st.session_state:
-                    st.session_state.submitted_claims = []
-                st.session_state.submitted_claims.append({
-                    "claim_id": claim_id, "claim_type": claim_type, "decision": decision
+
+            # ── Persist to session state ──────────────────────────────────────
+            if "submitted_claims" not in st.session_state:
+                st.session_state.submitted_claims = []
+            st.session_state.submitted_claims.append({
+                "claim_id": claim_id,
+                "claim_type": claim_type,
+                "decision": decision,
+                "amount": float(amount),
+                "client": client_name.strip().upper(),
+                "fraud_score": state["extracted_data"].get("g_fraud_score", 0),
+                "judi_risk": state["extracted_data"].get("f_judi_risk_level", "LOW"),
+                "net_payable": (state.get("policy_check") or {}).get("net_payable", 0),
+                "date": date.today().isoformat(),
+            })
+            # Push HITL cases to the shared queue
+            if decision == "hitl":
+                if "hitl_queue" not in st.session_state:
+                    st.session_state.hitl_queue = _default_hitl_queue()
+                st.session_state.hitl_queue.append({
+                    "claim_id": claim_id,
+                    "claim_type": claim_type,
+                    "client": client_name.strip().upper(),
+                    "amount": float(amount),
+                    "reason": state["extracted_data"].get("e_rationale", "Revisión requerida"),
+                    "fraud_score": state["extracted_data"].get("g_fraud_score", 0),
+                    "judi_risk": state["extracted_data"].get("f_judi_risk_level", "LOW"),
+                    "created": date.today().isoformat(),
                 })
                 if decision == "approve":
                     pc = state.get("policy_check") or {}
@@ -626,38 +740,7 @@ elif page == "Cola HITL":
     st.caption("Expedientes pendientes de revisión humana — SP-PCS-009 §3.3")
 
     if "hitl_queue" not in st.session_state:
-        st.session_state.hitl_queue = [
-            {
-                "claim_id": "EXP-2026-0007",
-                "claim_type": "RC",
-                "client": "JIMÉNEZ PAREDES HECTOR",
-                "amount": 1_250_000,
-                "reason": "Monto neto RD$1,250,000 supera umbral HITL de RD$500,000",
-                "fraud_score": 0.05,
-                "judi_risk": "MEDIUM",
-                "created": "2026-05-20",
-            },
-            {
-                "claim_id": "EXP-2026-0023",
-                "claim_type": "danys_propis",
-                "client": "MORALES RUIZ PABLO",
-                "amount": 180_000,
-                "reason": "Score fraude 38% — indicios de horario nocturno y múltiples reclamaciones",
-                "fraud_score": 0.38,
-                "judi_risk": "LOW",
-                "created": "2026-05-21",
-            },
-            {
-                "claim_id": "EXP-2026-0041",
-                "claim_type": "DPA",
-                "client": "FICTICIO GOMEZ RIOS ANTONIO RAFAEL",
-                "amount": 320_000,
-                "reason": "Coincidencia en lista OFAC — revisión urgente Oficial de Cumplimiento",
-                "fraud_score": 0.00,
-                "judi_risk": "HIGH",
-                "created": "2026-05-22",
-            },
-        ]
+        st.session_state.hitl_queue = _default_hitl_queue()
 
     queue = [e for e in st.session_state.hitl_queue if e.get("status") is None]
     st.metric("Expedientes en cola", len(queue))
@@ -708,16 +791,43 @@ elif page == "Dashboard KPIs":
     st.title("Dashboard KPIs")
     st.caption("Métricas de rendimiento del sistema Smart-Claims · Enero–Mayo 2026")
 
+    # Session stats (real)
+    session_claims = st.session_state.get("submitted_claims", [])
+    session_total = len(session_claims)
+    session_hitl = len([c for c in session_claims if c["decision"] == "hitl"])
+    session_approved = len([c for c in session_claims if c["decision"] == "approve"])
+    session_auto = (session_approved + len([c for c in session_claims if c["decision"] == "reject"])) / max(session_total, 1)
+
+    if session_total:
+        st.subheader("Esta sesión")
+        s1, s2, s3, s4 = st.columns(4)
+        s1.metric("Reclamaciones procesadas", session_total)
+        s2.metric("Aprobadas", session_approved)
+        s3.metric("En cola HITL", session_hitl)
+        s4.metric("Tasa automatización", f"{session_auto:.0%}")
+        if session_claims:
+            df_s = pd.DataFrame(session_claims)
+            dec_counts = df_s["decision"].value_counts().reset_index()
+            dec_counts.columns = ["Decisión", "Cantidad"]
+            fig_s = px.bar(dec_counts, x="Decisión", y="Cantidad", color="Decisión",
+                           color_discrete_map={"approve": "#28a745", "reject": "#dc3545",
+                                               "hitl": "#6f42c1", "request_info": "#ffc107"},
+                           title="Decisiones en esta sesión")
+            fig_s.update_layout(height=250, showlegend=False, margin=dict(t=40, b=20))
+            st.plotly_chart(fig_s, use_container_width=True)
+        st.divider()
+
+    st.subheader("Histórico enero–mayo 2026")
     dates = [date(2026, 1, 1) + timedelta(weeks=i) for i in range(21)]
     weekly = [28, 31, 25, 33, 29, 35, 38, 30, 27, 32, 40, 36, 34, 29, 37, 41, 38, 33, 35, 39, 42]
     auto_pct = [68, 70, 71, 69, 72, 74, 73, 75, 76, 74, 77, 78, 76, 79, 78, 80, 81, 79, 82, 81, 83]
     avg_days = [18, 17, 19, 16, 15, 14, 16, 13, 15, 14, 12, 13, 11, 12, 10, 11, 10, 9, 10, 9, 8]
 
     k1, k2, k3, k4, k5 = st.columns(5)
-    k1.metric("Total expedientes", "712")
+    k1.metric("Total expedientes", f"{712 + session_total}")
     k2.metric("Automatización", "79%", delta="+15% vs. AS-IS")
     k3.metric("Días promedio", "10.2", delta="-8 días vs. AS-IS", delta_color="inverse")
-    k4.metric("Cola HITL activa", "47")
+    k4.metric("Cola HITL activa", f"{47 + session_hitl}")
     k5.metric("Judicializados", "71 (10%)")
 
     st.divider()

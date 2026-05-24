@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
-VLM_MODEL = "claude-sonnet-4-20250514"
+VLM_MODEL = "claude-sonnet-4-6"
 
 _client: AsyncAnthropic | None = None
 

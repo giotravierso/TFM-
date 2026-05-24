@@ -55,7 +55,7 @@ def extract_multimodal(claim_id: str, file_url: str, doc_type: str) -> dict:
     Returns:
         Dades extretes: import, data, tipus_dany, confiança.
     """
-    # Simulació: en producció crida Claude claude-sonnet-4-20250514 amb visió
+    # Simulació: en producció crida Claude claude-sonnet-4-6 amb visió
     mock_data = {
         "factura":     {"amount": round(random.uniform(500, 8000), 2), "date": "2025-05-10", "vendor": "Taller Martínez"},
         "foto_danys":  {"damage_type": "colisió frontal", "severity": "moderat", "estimated_repair": 3200},
@@ -67,7 +67,7 @@ def extract_multimodal(claim_id: str, file_url: str, doc_type: str) -> dict:
         "doc_type": doc_type,
         "extracted": data,
         "confidence": round(random.uniform(0.82, 0.98), 3),
-        "model": "claude-sonnet-4-20250514 (mock)",
+        "model": "claude-sonnet-4-6 (mock)",
     }
 
 
