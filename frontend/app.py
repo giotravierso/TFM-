@@ -357,12 +357,20 @@ if page in ("Nueva Reclamación", "Reportar Reclamación"):
         st.divider()
         st.subheader("Documentos adjuntos")
         if page == "Reportar Reclamación":
-            st.caption("Adjunta los documentos requeridos. Las fotos deben mostrar claramente los daños.")
+            st.caption(
+                "Todos los documentos marcados con ⚠️ son **obligatorios**. "
+                "Las fotos deben subirse en formato digital. "
+                "Los documentos físicos pueden confirmarse si ya fueron entregados en oficina."
+            )
         else:
-            st.caption("Sube los originales o copias digitalizadas. Las imágenes serán analizadas por Vision IA.")
+            st.caption(
+                "⚠️ = obligatorio. Fotos → upload digital (analizadas por Vision IA). "
+                "Documentos físicos → upload digital o confirmar entrega presencial."
+            )
 
         required = REQUIRED_DOCS.get(claim_type, [])
-        uploaded_files: dict[str, object] = {}
+        uploaded_files: dict[str, object] = {}   # doc_key → file object
+        physical_confirmed: dict[str, bool] = {}  # doc_key → confirmed in-person
 
         if required:
             doc_cols = st.columns(2)
@@ -370,21 +378,31 @@ if page in ("Nueva Reclamación", "Reportar Reclamación"):
                 with doc_cols[i % 2]:
                     label = DOC_LABELS.get(doc_key, doc_key)
                     if doc_key in IMAGE_DOC_TYPES:
+                        # Photos: digital upload mandatory
                         f = st.file_uploader(
-                            f"📷 {label}",
+                            f"⚠️ 📷 {label}",
                             type=["jpg", "jpeg", "png"],
                             key=f"doc_{i}",
-                            help="JPG o PNG — será analizado por IA",
+                            help="Obligatorio — JPG o PNG, analizado por Claude Vision",
                         )
+                        if f is not None:
+                            uploaded_files[doc_key] = f
                     else:
+                        # Physical docs: upload OR in-person confirmation
                         f = st.file_uploader(
-                            f"📄 {label}",
+                            f"⚠️ 📄 {label}",
                             type=["pdf", "jpg", "jpeg", "png"],
                             key=f"doc_{i}",
-                            help="PDF, JPG o PNG",
+                            help="Obligatorio — sube el archivo o confirma entrega presencial abajo",
                         )
-                    if f is not None:
-                        uploaded_files[doc_key] = f
+                        confirmed = st.checkbox(
+                            "Presentado físicamente en oficina",
+                            key=f"phys_{i}",
+                        )
+                        if f is not None:
+                            uploaded_files[doc_key] = f
+                        if confirmed:
+                            physical_confirmed[doc_key] = True
         else:
             st.error("Daños mecánicos (§2.5) — No cubiertos. Será rechazado automáticamente.")
 
@@ -399,15 +417,67 @@ if page in ("Nueva Reclamación", "Reportar Reclamación"):
 
     # ── Procesamiento con agentes reales ──────────────────────────────────────
     if submitted:
+        # ── Validación de campos mínimos (hard stop) ──────────────────────────
+        hard_errors = []
         if not client_name.strip():
-            st.error("El nombre del asegurado es obligatorio.")
+            hard_errors.append("El nombre del asegurado es obligatorio.")
+        if not policy_number.strip():
+            hard_errors.append("El número de póliza es obligatorio.")
+        if amount <= 0:
+            hard_errors.append("El monto solicitado debe ser mayor a RD$0.")
+        if hard_errors:
+            for err in hard_errors:
+                st.error(err)
             st.stop()
 
         claim_id = f"EXP-2026-{uuid.uuid4().hex[:4].upper()}"
         conductor = conductor_name.strip() or client_name.strip()
 
-        # Build submitted_docs list from uploaded files
-        submitted_docs = list(uploaded_files.keys())
+        # Build submitted_docs list from uploaded files + physical confirmations
+        submitted_docs = list(set(list(uploaded_files.keys()) + list(physical_confirmed.keys())))
+
+        # ── Toll gate: documentos obligatorios ───────────────────────────────
+        missing_mandatory = []
+        if required:
+            for doc_key in required:
+                provided = (
+                    doc_key in uploaded_files
+                    or physical_confirmed.get(doc_key, False)
+                )
+                if not provided:
+                    missing_mandatory.append(doc_key)
+
+        if missing_mandatory:
+            # Save as PENDING_DOCS — don't run agents yet
+            if "submitted_claims" not in st.session_state:
+                st.session_state.submitted_claims = []
+            st.session_state.submitted_claims.append({
+                "claim_id": claim_id,
+                "claim_type": claim_type,
+                "decision": "pending_docs",
+                "amount": float(amount),
+                "client": client_name.strip().upper(),
+                "policy_number": policy_number.strip(),
+                "description": incident_desc,
+                "missing_docs": missing_mandatory,
+                "uploaded_files_keys": list(uploaded_files.keys()),
+                "physical_confirmed_keys": list(physical_confirmed.keys()),
+                "fraud_score": 0,
+                "judi_risk": "—",
+                "net_payable": 0,
+                "date": date.today().isoformat(),
+            })
+
+            st.warning(f"Expediente **{claim_id}** registrado en estado **PENDIENTE DE DOCUMENTACIÓN**.")
+            st.error("Faltan los siguientes documentos obligatorios:")
+            for dk in missing_mandatory:
+                st.markdown(f"  • {DOC_LABELS.get(dk, dk)}")
+            st.info(
+                "Puedes aportar los documentos faltantes desde **Mis Reclamaciones** "
+                "cuando los tengas disponibles. El expediente será procesado automáticamente "
+                "una vez estén completos."
+            )
+            st.stop()
 
         # Find primary image for Agent C (first image-type doc uploaded)
         primary_image_uri = ""
@@ -882,10 +952,15 @@ elif page == "Mis Reclamaciones":
     st.title("Mis Reclamaciones")
     st.caption("Consulta el estado de tus reclamaciones activas")
 
+    CLIENT_DECISION["pending_docs"] = (
+        "📋 Documentación pendiente", "#fd7e14",
+        "Tu expediente está registrado pero necesitamos documentación adicional para procesarlo."
+    )
+
     if "submitted_claims" not in st.session_state or not st.session_state.get("submitted_claims"):
         st.info("No tienes reclamaciones registradas en esta sesión. Usa **Reportar Reclamación** para iniciar una.")
     else:
-        for cl in st.session_state.submitted_claims:
+        for idx, cl in enumerate(st.session_state.submitted_claims):
             with st.container(border=True):
                 c1, c2, c3 = st.columns(3)
                 c1.metric("Expediente", cl["claim_id"])
@@ -896,6 +971,48 @@ elif page == "Mis Reclamaciones":
                     unsafe_allow_html=True,
                 )
                 st.caption(msg)
+
+                # Pending docs: show what's missing + uploader to complete
+                if cl["decision"] == "pending_docs" and cl.get("missing_docs"):
+                    with st.expander("Completar documentación faltante"):
+                        st.warning("Documentos requeridos para procesar tu expediente:")
+                        completed_uploads = {}
+                        phys_confirmed = {}
+                        for dk in cl["missing_docs"]:
+                            doc_label = DOC_LABELS.get(dk, dk)
+                            if dk in IMAGE_DOC_TYPES:
+                                uf = st.file_uploader(
+                                    f"📷 {doc_label}",
+                                    type=["jpg", "jpeg", "png"],
+                                    key=f"complete_{idx}_{dk}",
+                                )
+                                if uf:
+                                    completed_uploads[dk] = uf
+                            else:
+                                uf = st.file_uploader(
+                                    f"📄 {doc_label}",
+                                    type=["pdf", "jpg", "jpeg", "png"],
+                                    key=f"complete_{idx}_{dk}",
+                                )
+                                confirmed = st.checkbox(
+                                    "Presentado físicamente",
+                                    key=f"complete_phys_{idx}_{dk}",
+                                )
+                                if uf:
+                                    completed_uploads[dk] = uf
+                                if confirmed:
+                                    phys_confirmed[dk] = True
+
+                        still_missing = [
+                            dk for dk in cl["missing_docs"]
+                            if dk not in completed_uploads and not phys_confirmed.get(dk)
+                        ]
+                        if not still_missing:
+                            st.success("✅ Todos los documentos están completos. Listo para procesar.")
+                            if st.button("Enviar y procesar reclamación", key=f"process_{idx}", type="primary"):
+                                st.info("Procesando... Ve a **Reportar Reclamación** con todos los documentos para ejecutar el pipeline completo.")
+                        else:
+                            st.caption(f"Faltan {len(still_missing)} documento(s) más.")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
