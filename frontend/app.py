@@ -90,6 +90,25 @@ st.set_page_config(
 
 rag_state = _init_rag()
 
+# ── Role config ────────────────────────────────────────────────────────────────
+ROLES = {
+    "Cliente / Asegurado": {
+        "icon": "👤",
+        "pages": ["Reportar Reclamación", "Mis Reclamaciones", "Consulta Póliza"],
+        "show_internal_scores": False,
+    },
+    "Agente de Servicio": {
+        "icon": "🧑‍💼",
+        "pages": ["Nueva Reclamación", "Cola HITL", "Gestión Pólizas", "Consulta Agente H"],
+        "show_internal_scores": True,
+    },
+    "Supervisor / Cumplimiento": {
+        "icon": "🛡️",
+        "pages": ["Cola HITL", "Dashboard KPIs", "Gestión Pólizas"],
+        "show_internal_scores": True,
+    },
+}
+
 # ── Sidebar ────────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.image(
@@ -100,9 +119,19 @@ with st.sidebar:
     st.caption("Sistema agéntico de gestión de reclamaciones · PoC TFM")
     st.divider()
 
+    role = st.selectbox(
+        "Accediendo como",
+        list(ROLES.keys()),
+        format_func=lambda r: f"{ROLES[r]['icon']} {r}",
+    )
+    role_cfg = ROLES[role]
+    show_scores = role_cfg["show_internal_scores"]
+
+    st.divider()
+
     page = st.radio(
         "Navegación",
-        ["Nueva Reclamación", "Gestión Pólizas", "Cola HITL", "Dashboard KPIs", "Consulta Agente H"],
+        role_cfg["pages"],
         label_visibility="collapsed",
     )
 
@@ -207,12 +236,28 @@ def _build_state(claim_id, extracted_data):
     }
 
 
+# ── Client-friendly decision labels ───────────────────────────────────────────
+CLIENT_DECISION = {
+    "approve":      ("✅ Reclamación aprobada", "#28a745",
+                     "Tu reclamación ha sido aprobada. Recibirás el pago en los próximos días hábiles."),
+    "reject":       ("❌ Reclamación no procedente", "#dc3545",
+                     "Tu reclamación no puede ser procesada según las condiciones de tu póliza."),
+    "request_info": ("📋 Documentación pendiente", "#ffc107",
+                     "Necesitamos documentación adicional para continuar con tu reclamación."),
+    "hitl":         ("⏳ En revisión", "#6f42c1",
+                     "Tu reclamación está siendo revisada por nuestro equipo especializado. Te contactaremos pronto."),
+}
+
 # ══════════════════════════════════════════════════════════════════════════════
-# PAGE 1 — Nueva Reclamación (agentes reales)
+# PAGE 1 — Nueva Reclamación / Reportar Reclamación
 # ══════════════════════════════════════════════════════════════════════════════
-if page == "Nueva Reclamación":
-    st.title("Nueva Reclamación")
-    st.caption("El formulario invoca los 8 agentes en tiempo real — sin mock")
+if page in ("Nueva Reclamación", "Reportar Reclamación"):
+    if page == "Reportar Reclamación":
+        st.title("Reportar un Accidente")
+        st.caption("Rellena el formulario con los detalles del incidente. Nuestro sistema lo procesará de forma inmediata.")
+    else:
+        st.title("Nueva Reclamación")
+        st.caption("El formulario invoca los 8 agentes en tiempo real — sin mock")
 
     with st.form("claim_form"):
         col1, col2 = st.columns(2)
@@ -312,8 +357,12 @@ if page == "Nueva Reclamación":
 
         state = _build_state(claim_id, extracted)
 
-        st.divider()
-        st.subheader(f"Procesando expediente `{claim_id}`")
+        if show_scores:
+            st.divider()
+            st.subheader(f"Procesando expediente `{claim_id}`")
+        else:
+            st.divider()
+            st.info("Estamos procesando tu reclamación. Por favor espera...")
 
         try:
             from app.agents.agent_b import validate_claim_documents
@@ -324,134 +373,149 @@ if page == "Nueva Reclamación":
             from app.agents.agent_e import decide_claim
 
             # ── Agent B ──────────────────────────────────────────────────────
-            with st.expander("🔍 Agente B — Validación Documental", expanded=True):
+            label_b = "🔍 Agente B — Validación Documental" if show_scores else "📋 Verificando documentación"
+            with st.expander(label_b, expanded=True):
                 with st.spinner("Verificando documentos..."):
                     res_b = _run(validate_claim_documents(state))
                 state["extracted_data"].update(res_b.get("extracted_data", {}))
                 if res_b.get("decision") == "reject":
-                    st.error(f"❌ Rechazo inmediato: {state['extracted_data'].get('b_reject_reason', '')}")
-                    st.markdown(
-                        _badge("REJECT", STATUS_COLORS["reject"]),
-                        unsafe_allow_html=True,
-                    )
+                    reason = state["extracted_data"].get("b_reject_reason", "")
+                    if show_scores:
+                        st.error(f"❌ Rechazo inmediato: {reason}")
+                        st.markdown(_badge("REJECT", STATUS_COLORS["reject"]), unsafe_allow_html=True)
+                    else:
+                        st.error("Tu reclamación no puede procesarse con la documentación aportada.")
+                        if reason:
+                            st.caption(reason)
                     st.stop()
                 missing = state["extracted_data"].get("b_missing_docs", [])
                 if missing:
-                    st.warning(f"Documentos faltantes: {', '.join(missing)}")
+                    if show_scores:
+                        st.warning(f"Documentos faltantes: {', '.join(missing)}")
+                    else:
+                        st.warning(f"Faltan documentos: {', '.join([DOC_LABELS.get(d, d) for d in missing])}")
                 else:
-                    st.success("✅ Documentos completos")
-                if state["extracted_data"].get("flag_cheque_propietario"):
+                    st.success("✅ Documentación correcta")
+                if show_scores and state["extracted_data"].get("flag_cheque_propietario"):
                     st.info("ℹ️ R-SP-PCS-09-002: Conductor ≠ propietario — cheque a nombre del propietario")
 
             # ── Agent G ──────────────────────────────────────────────────────
-            with st.expander("🛡️ Agente G — OFAC + Fraude", expanded=True):
-                with st.spinner("Verificando listas de sanciones y score de fraude..."):
-                    res_g = _run(check_fraud_and_compliance(state))
+            with st.spinner("Verificando identidad...") if not show_scores else st.expander("🛡️ Agente G — OFAC + Fraude", expanded=True):
+                res_g = _run(check_fraud_and_compliance(state))
                 state["extracted_data"].update(res_g.get("extracted_data", {}))
                 state["hitl_required"] = res_g.get("hitl_required", False)
-
-                g = state["extracted_data"]
-                c1, c2, c3 = st.columns(3)
-                ofac_ok = not g.get("g_ofac_flagged", False)
-                c1.metric("OFAC", "LIMPIO" if ofac_ok else f"⚠️ {g.get('g_ofac_match_name', '')}")
-                c2.metric("Score fraude", f"{g.get('g_fraud_score', 0):.0%}")
-                c3.metric("Debida diligencia", g.get("g_due_diligence", "simplificada").upper())
-
-                if g.get("g_ofac_flagged"):
-                    st.error(f"⚠️ OFAC: {g.get('g_ofac_match_name')} — score {g.get('g_ofac_match_score', 0):.0f}%")
+                if show_scores:
+                    g = state["extracted_data"]
+                    c1, c2, c3 = st.columns(3)
+                    ofac_ok = not g.get("g_ofac_flagged", False)
+                    c1.metric("OFAC", "LIMPIO" if ofac_ok else f"⚠️ {g.get('g_ofac_match_name', '')}")
+                    c2.metric("Score fraude", f"{g.get('g_fraud_score', 0):.0%}")
+                    c3.metric("Debida diligencia", g.get("g_due_diligence", "simplificada").upper())
+                    if g.get("g_ofac_flagged"):
+                        st.error(f"⚠️ OFAC: {g.get('g_ofac_match_name')} — score {g.get('g_ofac_match_score', 0):.0f}%")
 
             # ── Agent F ──────────────────────────────────────────────────────
-            with st.expander("⚖️ Agente F — Riesgo Judicialización (XGBoost)", expanded=True):
-                with st.spinner("Prediciendo riesgo de litigio..."):
-                    res_f = _run(predict_judicialization_risk(state))
+            with st.spinner("Analizando caso...") if not show_scores else st.expander("⚖️ Agente F — Riesgo Judicialización (XGBoost)", expanded=True):
+                res_f = _run(predict_judicialization_risk(state))
                 state["extracted_data"].update(res_f.get("extracted_data", {}))
-                f = state["extracted_data"]
-                risk = f.get("f_judi_risk_level", "LOW")
-                risk_color = {"HIGH": "#dc3545", "MEDIUM": "#ffc107", "LOW": "#28a745"}[risk]
-                c1, c2 = st.columns(2)
-                c1.metric("Probabilidad litigio", f"{f.get('f_judi_probability', 0):.1%}")
-                c2.metric("Nivel de riesgo", risk)
-                st.caption(f"Modelo: {f.get('f_model_used', '—')}")
+                if show_scores:
+                    f = state["extracted_data"]
+                    risk = f.get("f_judi_risk_level", "LOW")
+                    c1, c2 = st.columns(2)
+                    c1.metric("Probabilidad litigio", f"{f.get('f_judi_probability', 0):.1%}")
+                    c2.metric("Nivel de riesgo", risk)
+                    st.caption(f"Modelo: {f.get('f_model_used', '—')}")
 
             # ── Agent C ──────────────────────────────────────────────────────
-            with st.expander("📸 Agente C — Extracción VLM (Claude Vision)", expanded=True):
-                if not HAS_KEY:
+            with st.spinner("Procesando documentos...") if not show_scores else st.expander("📸 Agente C — Extracción VLM (Claude Vision)", expanded=True):
+                if show_scores and not HAS_KEY:
                     st.warning("Sin API key — modo PoC (descripción textual)")
-                with st.spinner("Analizando documentos..."):
-                    res_c = _run(extract_from_document(state))
+                res_c = _run(extract_from_document(state))
                 state["extracted_data"].update(res_c.get("extracted_data", {}))
-                c_res = state["extracted_data"].get("c_result", {})
-                if "error" not in c_res:
-                    st.json(c_res)
-                else:
-                    st.caption(f"Resultado: {c_res}")
+                if show_scores:
+                    c_res = state["extracted_data"].get("c_result", {})
+                    if "error" not in c_res:
+                        st.json(c_res)
+                    else:
+                        st.caption(f"Resultado: {c_res}")
 
             # ── Agent D ──────────────────────────────────────────────────────
-            with st.expander("📋 Agente D — Cobertura RAG (ChromaDB + Claude)", expanded=True):
-                if not HAS_KEY:
+            with st.spinner("Consultando condiciones de póliza...") if not show_scores else st.expander("📋 Agente D — Cobertura RAG (ChromaDB + Claude)", expanded=True):
+                if show_scores and not HAS_KEY:
                     st.warning("Sin API key — fallback a reglas SP-PCS-009 hardcoded")
-                with st.spinner("Consultando póliza..."):
-                    res_d = _run(check_policy_coverage(state))
+                res_d = _run(check_policy_coverage(state))
                 state["policy_check"] = res_d.get("policy_check", {})
-                pc = state["policy_check"]
-
-                c1, c2, c3, c4 = st.columns(4)
-                c1.metric("Cubierto", "Sí" if pc.get("covered") else "No")
-                c2.metric("Cobertura máx.", _fmt_rd(pc.get("max_coverage", 0)))
-                c3.metric("Deducible", _fmt_rd(pc.get("deductible", 0)))
-                c4.metric("Neto pagable", _fmt_rd(pc.get("net_payable", 0)))
-                st.caption(f"Sección: {pc.get('policy_section', '—')}  ·  Confianza: {pc.get('confidence', 0):.0%}")
-
-                chunks = pc.get("context_chunks", [])
-                if chunks:
-                    with st.expander(f"📄 Chunks RAG recuperados ({len(chunks)})", expanded=False):
-                        for ch in chunks:
-                            st.markdown(f"**{ch['source']}** (dist: {ch['distance']})")
-                            st.text(ch["document"][:300] + "..." if len(ch["document"]) > 300 else ch["document"])
-                            st.divider()
-                elif rag_ok:
-                    st.caption("→ ChromaDB sin documentos suficientes — usando fallback")
+                if show_scores:
+                    pc = state["policy_check"]
+                    c1, c2, c3, c4 = st.columns(4)
+                    c1.metric("Cubierto", "Sí" if pc.get("covered") else "No")
+                    c2.metric("Cobertura máx.", _fmt_rd(pc.get("max_coverage", 0)))
+                    c3.metric("Deducible", _fmt_rd(pc.get("deductible", 0)))
+                    c4.metric("Neto pagable", _fmt_rd(pc.get("net_payable", 0)))
+                    st.caption(f"Sección: {pc.get('policy_section', '—')}  ·  Confianza: {pc.get('confidence', 0):.0%}")
+                    chunks = pc.get("context_chunks", [])
+                    if chunks:
+                        with st.expander(f"📄 Chunks RAG recuperados ({len(chunks)})", expanded=False):
+                            for ch in chunks:
+                                st.markdown(f"**{ch['source']}** (dist: {ch['distance']})")
+                                st.text(ch["document"][:300] + "..." if len(ch["document"]) > 300 else ch["document"])
+                                st.divider()
 
             # ── Agent E ──────────────────────────────────────────────────────
-            with st.expander("🧠 Agente E — Decisión Final (CoT + HITL)", expanded=True):
-                if not HAS_KEY:
+            with st.spinner("Tomando decisión final...") if not show_scores else st.expander("🧠 Agente E — Decisión Final (CoT + HITL)", expanded=True):
+                if show_scores and not HAS_KEY:
                     st.warning("Sin API key — usando _rule_based_decision() determinista")
-                with st.spinner("Tomando decisión..."):
-                    res_e = _run(decide_claim(state))
+                res_e = _run(decide_claim(state))
                 state.update(res_e)
                 state["extracted_data"].update(res_e.get("extracted_data", {}))
-
-                decision = state.get("decision", "request_info")
-                color = STATUS_COLORS.get(decision, "#6c757d")
-                st.markdown(
-                    f"**Decisión:** " + _badge(decision.upper(), color),
-                    unsafe_allow_html=True,
-                )
-                rationale = state["extracted_data"].get("e_rationale", "")
-                if rationale:
-                    st.info(f"💬 {rationale}")
+                if show_scores:
+                    decision = state.get("decision", "request_info")
+                    color = STATUS_COLORS.get(decision, "#6c757d")
+                    st.markdown(f"**Decisión:** " + _badge(decision.upper(), color), unsafe_allow_html=True)
+                    rationale = state["extracted_data"].get("e_rationale", "")
+                    if rationale:
+                        st.info(f"💬 {rationale}")
 
             # ── Resultado final ───────────────────────────────────────────────
             st.divider()
             decision = state.get("decision", "request_info")
-            status_val = state.get("status", "VALIDATING")
-            color = STATUS_COLORS.get(decision, "#6c757d")
 
-            st.markdown(
-                f"## Resultado: " + _badge(decision.upper(), color),
-                unsafe_allow_html=True,
-            )
-
-            rc1, rc2, rc3 = st.columns(3)
-            rc1.metric("Expediente", claim_id)
-            rc2.metric("Estado", status_val)
-            if decision == "approve":
-                rc3.metric("Pago autorizado", _fmt_rd(state["policy_check"].get("net_payable", 0)))
-            elif decision == "hitl":
-                rc3.metric("Cola HITL", "Enviado a revisión humana")
-            elif decision == "request_info":
-                missing = state["extracted_data"].get("b_missing_docs", [])
-                rc3.metric("Documentos pendientes", str(len(missing)))
+            if show_scores:
+                color = STATUS_COLORS.get(decision, "#6c757d")
+                st.markdown(f"## Resultado: " + _badge(decision.upper(), color), unsafe_allow_html=True)
+                rc1, rc2, rc3 = st.columns(3)
+                rc1.metric("Expediente", claim_id)
+                rc2.metric("Estado", state.get("status", "VALIDATING"))
+                if decision == "approve":
+                    rc3.metric("Pago autorizado", _fmt_rd(state["policy_check"].get("net_payable", 0)))
+                elif decision == "hitl":
+                    rc3.metric("Cola HITL", "Enviado a revisión humana")
+                elif decision == "request_info":
+                    missing = state["extracted_data"].get("b_missing_docs", [])
+                    rc3.metric("Documentos pendientes", str(len(missing)))
+            else:
+                label, color, msg = CLIENT_DECISION.get(decision, CLIENT_DECISION["request_info"])
+                st.markdown(
+                    f'<div style="background:{color};color:white;padding:20px;border-radius:10px;text-align:center">'
+                    f'<h2 style="margin:0">{label}</h2>'
+                    f'<p style="margin:8px 0 0">{msg}</p>'
+                    f'</div>',
+                    unsafe_allow_html=True,
+                )
+                st.caption(f"Número de expediente: **{claim_id}** — Guárdalo para hacer seguimiento.")
+                if "submitted_claims" not in st.session_state:
+                    st.session_state.submitted_claims = []
+                st.session_state.submitted_claims.append({
+                    "claim_id": claim_id, "claim_type": claim_type, "decision": decision
+                })
+                if decision == "approve":
+                    pc = state.get("policy_check") or {}
+                    if pc.get("net_payable"):
+                        st.success(f"Monto aprobado: **{_fmt_rd(pc['net_payable'])}**")
+                elif decision == "request_info":
+                    missing = state["extracted_data"].get("b_missing_docs", [])
+                    if missing:
+                        st.warning("Documentos requeridos:\n" + "\n".join(f"- {DOC_LABELS.get(d, d)}" for d in missing))
 
         except Exception as exc:
             st.error(f"Error en el pipeline: {exc}")
@@ -702,14 +766,41 @@ elif page == "Dashboard KPIs":
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# PAGE 5 — Consulta Agente H
+# PAGE — Mis Reclamaciones (Cliente)
 # ══════════════════════════════════════════════════════════════════════════════
-elif page == "Consulta Agente H":
-    st.title("Consulta Agente H — Asistente Experto")
-    st.caption(
-        "RAG conversacional sobre SP-PCS-009, SP-PCS-022 y PEPIN-POL-CP-0006. "
-        "Las respuestas citan la sección exacta de la póliza."
-    )
+elif page == "Mis Reclamaciones":
+    st.title("Mis Reclamaciones")
+    st.caption("Consulta el estado de tus reclamaciones activas")
+
+    if "submitted_claims" not in st.session_state or not st.session_state.get("submitted_claims"):
+        st.info("No tienes reclamaciones registradas en esta sesión. Usa **Reportar Reclamación** para iniciar una.")
+    else:
+        for cl in st.session_state.submitted_claims:
+            with st.container(border=True):
+                c1, c2, c3 = st.columns(3)
+                c1.metric("Expediente", cl["claim_id"])
+                c2.metric("Tipo", CLAIM_TYPES.get(cl["claim_type"], cl["claim_type"]))
+                label, color, msg = CLIENT_DECISION.get(cl["decision"], CLIENT_DECISION["request_info"])
+                c3.markdown(
+                    f'<span style="background:{color};color:white;padding:4px 12px;border-radius:8px">{label}</span>',
+                    unsafe_allow_html=True,
+                )
+                st.caption(msg)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# PAGE — Consulta Póliza (Cliente) / Consulta Agente H (Agente)
+# ══════════════════════════════════════════════════════════════════════════════
+elif page in ("Consulta Agente H", "Consulta Póliza"):
+    if page == "Consulta Póliza":
+        st.title("Consulta sobre tu Póliza")
+        st.caption("Pregunta sobre coberturas, documentos requeridos, límites y plazos.")
+    else:
+        st.title("Consulta Agente H — Asistente Experto")
+        st.caption(
+            "RAG conversacional sobre SP-PCS-009, SP-PCS-022 y PEPIN-POL-CP-0006. "
+            "Las respuestas citan la sección exacta de la póliza."
+        )
 
     if not HAS_KEY:
         st.warning("⚠️ Sin ANTHROPIC_API_KEY el Agente H no puede responder. Configura la clave en los secrets.")
